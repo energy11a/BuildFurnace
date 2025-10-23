@@ -6,6 +6,8 @@ TagManager:
   tags:
   - BuildPlatform
   - Cube
+  - Particle
+  - Fire
   layers:
   - Default
   - TransparentFX

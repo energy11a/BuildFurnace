@@ -1,3 +1,0 @@
-repository "Buildfurnace/Buildfurnace@5773937221761@cloud"
-  path "/"
-    smartbranch "/main"

@@ -1356,6 +1356,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fire
       objectReference: {fileID: 0}
+    - target: {fileID: 5519868382672418841, guid: 7fdd3239fff3bb1468068f9560cdea49, type: 3}
+      propertyPath: m_TagString
+      value: Fire
+      objectReference: {fileID: 0}
     - target: {fileID: 6735345014472276323, guid: 7fdd3239fff3bb1468068f9560cdea49, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.47

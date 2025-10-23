@@ -101,6 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46b4949a9ce69e44198a406650b36343, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  origin: {x: 0, y: 0, z: 0}
   fire: {fileID: 5519868382672418841, guid: 7fdd3239fff3bb1468068f9560cdea49, type: 3}
   moveForce: 10
 --- !u!135 &9200853695309378123
@@ -146,7 +147,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0

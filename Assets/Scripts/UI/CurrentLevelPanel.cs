@@ -7,6 +7,7 @@ public class CurrentLevelPanel : MonoBehaviour
     public int rewardAmount;
     public string extraInfo;
 
+ 
 
     public void ChangeDesc(int level, int goal, int reward, string extra = "") 
     {
@@ -14,8 +15,13 @@ public class CurrentLevelPanel : MonoBehaviour
         goalTemp = goal;
         rewardAmount = reward;
         extraInfo = extra;
+
+        UpdateTexts();
     }
 
-
+    void UpdateTexts() 
+    {
+        
+    }
 
 }

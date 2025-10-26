@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6052265159725056708}
-  - component: {fileID: 4584398451072380955}
+  - component: {fileID: 2807463398716074923}
   m_Layer: 0
   m_Name: ParticleSpawner
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4584398451072380955
+--- !u!114 &2807463398716074923
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,7 +41,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8498050369823098191}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a368a556ca1655b48b87e3ca78e1ec9a, type: 3}
+  m_Script: {fileID: 11500000, guid: 9de5bec0e62a5a24eb5a6d239889eb52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particlePrefab: {fileID: 4126982243488040767, guid: e4a030c15505194428456cccd634cfb9, type: 3}
+  particlePrefab: {fileID: 0}
+  spawnRadius: 5
+  spawnRate: 0.2
+  spawnHeight: 1

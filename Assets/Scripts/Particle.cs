@@ -8,11 +8,14 @@ public class Particle : MonoBehaviour
     public float moveForce = 10f;
     private Rigidbody rb;
     private bool isCo2 = false;
+    private Renderer rend;
+    private Color baseColor;
 
     void Start()
     {
         origin = transform.position;
         rb = GetComponent<Rigidbody>();
+        rend = GetComponent<Renderer>();
     }
 
     void FixedUpdate()
@@ -33,6 +36,8 @@ public class Particle : MonoBehaviour
         {
             isCo2 = true;
             rb.AddForce(Vector3.up * 10, ForceMode.Impulse);
+            Color co2Color = new Color(1f, 0.5f, 0f, 0.5f); // orange with 50% alpha
+            rend.material.color = co2Color;
         }
     }
 }

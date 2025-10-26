@@ -7,7 +7,10 @@ public class CurrentLevelPanel : MonoBehaviour
     public int rewardAmount;
     public string extraInfo;
 
- 
+    public GameObject levelText;
+    public GameObject goalText;
+    public GameObject rewardText;
+    public GameObject extraText;
 
     public void ChangeDesc(int level, int goal, int reward, string extra = "") 
     {
@@ -18,7 +21,7 @@ public class CurrentLevelPanel : MonoBehaviour
 
         UpdateTexts();
     }
-
+    
     void UpdateTexts() 
     {
         

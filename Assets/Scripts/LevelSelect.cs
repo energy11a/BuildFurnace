@@ -74,6 +74,6 @@ public class LevelSelect : MonoBehaviour
 
     public void BackToMenu()
     {
-        SceneManager.LoadScene("MainMenu"); // Pane oma avamenüü scene nimi
+        SceneManager.LoadScene("MainMenu"); // Pane oma avamen?? scene nimi
     }
 }

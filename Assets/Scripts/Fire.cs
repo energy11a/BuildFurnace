@@ -14,6 +14,10 @@ public class Fire : MonoBehaviour
     public float smoothingAlpha = 0.2f;
     public float coolingPerSecond = 30f;
     public float Temperature { get; private set; }
+    public GameObject winPanel;
+    public float winTemperature = 100f;
+    public bool disablePanelOnStart = true;
+    private bool hasWon;
 
     float tick;
 
@@ -36,6 +40,15 @@ public class Fire : MonoBehaviour
         {
             tick = 0f;
             Events.Instance?.RaiseTempChange(Temperature);
+        }
+
+        if (!hasWon && Temperature >= winTemperature)
+        {
+            hasWon = true;
+            if (winPanel != null)
+                winPanel.SetActive(true);
+            else
+                Debug.LogWarning("[Fire] Win reached, but winPanel is not assigned in the Inspector.");
         }
     }
 

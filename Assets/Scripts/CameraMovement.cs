@@ -18,8 +18,8 @@ public class IsoCameraOrbit : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q)) BeginTurn(-1);
-        if (Input.GetKeyDown(KeyCode.E)) BeginTurn(1);
+        if (Input.GetKeyDown(KeyCode.E)) BeginTurn(-1);
+        if (Input.GetKeyDown(KeyCode.Q)) BeginTurn(1);
     }
 
     void LateUpdate()

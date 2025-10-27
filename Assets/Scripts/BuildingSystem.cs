@@ -1,111 +1,209 @@
+//See on chatgpt slop kood, kiire oli, võid vabalt üle kirjutada ja kustutada
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using UnityEngine.Tilemaps;
-using UnityEngine.UI;
 
-public class BuildingSystem: MonoBehaviour
+public class BuildingSystem : MonoBehaviour
 {
     public static BuildingSystem Instance;
-    
-    public GridLayout gridLayout;
-    private Grid  grid;
-    [SerializeField] private Tilemap tilemap;
 
+    [Header("Setup")]
+    public GridLayout gridLayout;
     public GameObject prefab1;
     public GameObject prefab2;
+    public string buildPlatformTag = "BuildPlatform";
 
-    private PlaceableObject _objectToPlace;
+    private Grid grid;
+    private readonly Dictionary<Vector3Int, GameObject> placed = new Dictionary<Vector3Int, GameObject>();
 
-    // Hoia koik grid positsioonid klotside jaoks
-    private Dictionary<Vector3Int, GameObject> placedBlocks = new Dictionary<Vector3Int, GameObject>();
-
-    #region Unity methods
-
-    private void Awake()
+    void Awake()
     {
         Instance = this;
         grid = gridLayout.GetComponent<Grid>();
+        if (grid.cellSize.z <= 0.0001f)
+            grid.cellSize = new Vector3(grid.cellSize.x, grid.cellSize.y, grid.cellSize.x);
     }
 
-    private void Update()
+    void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            InitializeWithObject(prefab1);
-        }
-        else if (Input.GetKeyDown(KeyCode.B))
-        {
-            InitializeWithObject(prefab2);
-        }
+        if (Input.GetKeyDown(KeyCode.A)) InitializeWithObject(prefab1);
+        else if (Input.GetKeyDown(KeyCode.B)) InitializeWithObject(prefab2);
     }
-    #endregion
-    
-    #region Utils
 
-    public Vector3 GetPlaceablePos()
+    public Quaternion GridRotation => grid.transform.rotation;
+    public void AlignToGrid(Transform t)
     {
-        
-        Vector3 position = Vector3.zero;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hit))
-        {
-            if (hit.collider.CompareTag("BuildPlatform") || hit.collider.CompareTag("Cube"))
-            {
-                Vector3Int cellPosition = gridLayout.WorldToCell(hit.point);
-
-                // Arvuta hiire positsioon kohaliku ruumi suhtes
-                Vector3 localHit = hit.collider.transform.InverseTransformPoint(hit.point);
-                Vector3Int offset = Vector3Int.zero;
-
-                // Snap X/Z kulgedele
-                if (Mathf.Abs(localHit.x) > Mathf.Abs(localHit.z))
-                    offset.x = (localHit.x > 0) ? 1 : -0;
-                else
-                    offset.z = (localHit.z > 0) ? 1 : -0;
-
-                // Snap peale Y, kui hiir on klotsi kohal
-                if (localHit.y > 0.1f)
-                    offset.y = 1;
-
-                Vector3Int newCell = cellPosition + offset;
-
-                // Kui uus lahter juba tais, tosta Y +1
-                if (placedBlocks.ContainsKey(newCell))
-                    newCell.y += 1;
-
-                // X ja Z suunal liigutame ainult 1 grid vorra, mitte pool cellSize
-                Vector3 basePos = gridLayout.CellToWorld(cellPosition);
-                position.x = basePos.x + offset.x * gridLayout.cellSize.x;
-                position.z = basePos.z + offset.z * gridLayout.cellSize.z;
-
-                // Y positsioon uhe grid sammuga ules (voi pool cellSize, kui alustame pinnast)
-                position.y = basePos.y + offset.y * gridLayout.cellSize.y;
-            }
-            else
-            {
-                position = hit.point;
-            }
-        }
-        else
-        {
-            position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10f));
-        }
-
-        return position;
+        if (!t) return;
+        t.rotation = grid.transform.rotation;
     }
 
+    Vector3Int OffsetFromNormalInGrid(Vector3 worldNormal)
+    {
+        var n = grid.transform.InverseTransformDirection(worldNormal).normalized;
+        float ax = Mathf.Abs(n.x), ay = Mathf.Abs(n.y), az = Mathf.Abs(n.z);
+        if (ay >= ax && ay >= az) return new Vector3Int(0, n.y > 0 ? 1 : -1, 0);
+        if (ax >= az)             return new Vector3Int(n.x > 0 ? 1 : -1, 0, 0);
+        return new Vector3Int(0, 0, n.z > 0 ? 1 : -1);
+    }
 
+    float PlatformTopAt(Vector3 world)
+    {
+        if (Physics.Raycast(world + Vector3.up * 50f, Vector3.down, out var h, 200f, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
+        {
+            if (h.collider.CompareTag(buildPlatformTag))
+                return h.collider.bounds.max.y;
+        }
+        var c = GameObject.FindGameObjectWithTag(buildPlatformTag);
+        return c ? c.GetComponent<Collider>().bounds.max.y : 0f;
+    }
 
-    #endregion
+    Vector3Int CellXZAt(Vector3 world)
+    {
+        var local = grid.transform.InverseTransformPoint(world);
+        var cs = grid.cellSize;
+        int x = Mathf.FloorToInt(local.x / cs.x);
+        int z = Mathf.FloorToInt(local.z / cs.z);
+        return new Vector3Int(x, 0, z);
+    }
 
-    #region Building placement
+    Vector3 FromKeyToWorld(Vector3Int key, float baseCenterY)
+    {
+        var cs = grid.cellSize;
+        var local = new Vector3((key.x + 0.5f) * cs.x, 0f, (key.z + 0.5f) * cs.z);
+        var world = grid.transform.TransformPoint(local);
+        return new Vector3(world.x, baseCenterY + key.y * cs.y, world.z);
+    }
+
+    Vector3Int GetKeyFor(GameObject go)
+    {
+        foreach (var kv in placed)
+            if (kv.Value == go) return kv.Key;
+
+        var baseCenterY = PlatformTopAt(go.transform.position) + grid.cellSize.y * 0.5f;
+        var key = CellXZAt(go.transform.position);
+        key.y = Mathf.RoundToInt((go.transform.position.y - baseCenterY) / grid.cellSize.y);
+        return key;
+    }
+
+    // Strong occupancy guard: dictionary + physics overlap (aligned to grid)
+    bool IsCellFree(Vector3Int key, float baseCenterY, Transform ignoreRoot)
+    {
+        if (placed.TryGetValue(key, out var existing))
+        {
+            if (!(ignoreRoot && existing && existing.transform.root == ignoreRoot))
+                return false;
+        }
+
+        var center = FromKeyToWorld(key, baseCenterY);
+        var half = grid.cellSize * 0.5f * 0.98f;
+        var hits = Physics.OverlapBox(center, half, grid.transform.rotation, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore);
+        foreach (var col in hits)
+        {
+            var root = col.transform.root;
+            if (ignoreRoot && root == ignoreRoot) continue;
+            if (root && root.CompareTag("Cube")) return false;
+        }
+        return true;
+    }
+
+    // Try to get a snapped position (platform or cube face). Returns true if snapping is possible.
+    public bool TryGetSnappedPos(out Vector3 snappedPos, Transform ignore = null)
+    {
+        snappedPos = Vector3.zero;
+
+        var cam = Camera.main;
+        if (!cam) return false;
+
+        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+        var hits = Physics.RaycastAll(ray, 1000f, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore)
+                          .OrderBy(h => h.distance);
+
+        RaycastHit? pick = null;
+        foreach (var h in hits)
+        {
+            if (ignore && h.collider && h.collider.transform.root == ignore.root) continue;
+            pick = h; break;
+        }
+        if (!pick.HasValue) return false;
+
+        var hit = pick.Value;
+
+        if (hit.collider.transform.root.CompareTag("Cube"))
+        {
+            var root = hit.collider.transform.root.gameObject;
+            var hitKey = GetKeyFor(root);
+            var off = OffsetFromNormalInGrid(hit.normal);
+
+            float baseCenterY = PlatformTopAt(hit.collider.transform.position) + grid.cellSize.y * 0.5f;
+
+            var target = hitKey + off;
+            int safety = 0;
+            while (!IsCellFree(target, baseCenterY, ignore) && safety++ < 256)
+                target += off;
+
+            snappedPos = FromKeyToWorld(target, baseCenterY);
+            return true;
+        }
+        else if (hit.collider.CompareTag(buildPlatformTag))
+        {
+            float baseCenterY = hit.collider.bounds.max.y + grid.cellSize.y * 0.5f;
+
+            var key = CellXZAt(hit.point);
+            key.y = 0;
+
+            int safety = 0;
+            while (!IsCellFree(key, baseCenterY, ignore) && safety++ < 256)
+                key.y += 1;
+
+            snappedPos = FromKeyToWorld(key, baseCenterY);
+            return true;
+        }
+
+        return false;
+    }
+
+    // For hotkeys A/B fallback preview
+    public Vector3 GetPlaceablePos(Transform ignore = null)
+    {
+        if (TryGetSnappedPos(out var pos, ignore)) return pos;
+        var cam = Camera.main;
+        return cam ? cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10f))
+                   : Vector3.zero;
+    }
 
     public void InitializeWithObject(GameObject prefab)
     {
-        Vector3 position = GetPlaceablePos();
-        GameObject obj = Instantiate(prefab, position, Quaternion.identity);
-        _objectToPlace = obj.GetComponent<PlaceableObject>();
-        obj.AddComponent<ObjectDrag>();
+        if (!prefab) return;
+
+        var pos = GetPlaceablePos();
+        var obj = Instantiate(prefab, pos, GridRotation); // aligned spawn
+        obj.tag = "Cube";
+        if (!obj.GetComponent<ObjectDrag>()) obj.AddComponent<ObjectDrag>();
     }
-    #endregion
+
+    public void RegisterPlaced(GameObject go)
+    {
+        if (!go) return;
+
+        var baseCenterY = PlatformTopAt(go.transform.position) + grid.cellSize.y * 0.5f;
+        var key = CellXZAt(go.transform.position);
+        key.y = Mathf.RoundToInt((go.transform.position.y - baseCenterY) / grid.cellSize.y);
+
+        int safety = 0;
+        while (!IsCellFree(key, baseCenterY, go.transform) && safety++ < 256)
+            key.y += 1;
+
+        go.transform.position = FromKeyToWorld(key, baseCenterY);
+        AlignToGrid(go.transform);                 // keep aligned on place
+        placed[key] = go;
+    }
+
+    public void Unregister(GameObject go)
+    {
+        if (!go) return;
+
+        var key = GetKeyFor(go);
+        if (placed.TryGetValue(key, out var g) && g == go)
+            placed.Remove(key);
+    }
 }

@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -20,7 +21,7 @@ public class CurrentLevelPanel : MonoBehaviour
         if (extraText) extraTmp = extraText.GetComponent<TMP_Text>();
     }
 
-    void OnEnable()
+    private void Start()
     {
         Events.Instance.OnTempChange += OnTempChange;
     }

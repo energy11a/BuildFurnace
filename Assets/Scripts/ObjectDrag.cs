@@ -1,4 +1,6 @@
 //See on chatgpt slop kood, kiire oli, võid vabalt üle kirjutada ja kustutada
+// ObjectDrag.cs
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -12,40 +14,52 @@ public class ObjectDrag : MonoBehaviour
     private Rigidbody rb;
     private bool lastSnapped;
 
+    // Layer juggling to ignore self while dragging
+    private readonly List<Transform> _layered = new List<Transform>();
+    private readonly List<int> _origLayers = new List<int>();
+    private int _ignoreRaycastLayer;
     private RigidbodyConstraints _prevConstraints;
+
+    void Awake()
+    {
+        _ignoreRaycastLayer = LayerMask.NameToLayer("Ignore Raycast");
+        rb = GetComponent<Rigidbody>();
+    }
 
     void Start()
     {
         outline = GetComponent<Outline>();
         if (outline) outline.enabled = false;
-
-        rb = GetComponent<Rigidbody>(); // optional at start; created on demand
     }
 
     void OnMouseDown()
     {
         if (outline) outline.enabled = true;
 
-        // Remove from grid occupancy
         BuildingSystem.Instance.Unregister(gameObject);
 
-        // Ensure a rigidbody exists
         if (!rb) rb = gameObject.AddComponent<Rigidbody>();
-
-        // Prep for drag
         _prevConstraints = rb.constraints;
         rb.isKinematic = true;
         rb.useGravity = false;
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
 
-        // Force correct grid alignment when picked up (clears physics tilt)
+        // Align immediately on pickup (clear physics tilt)
         BuildingSystem.Instance.AlignToGrid(transform);
+
+        // Hide from raycasts
+        _layered.Clear(); _origLayers.Clear();
+        foreach (var t in GetComponentsInChildren<Transform>(true))
+        {
+            _layered.Add(t);
+            _origLayers.Add(t.gameObject.layer);
+            if (_ignoreRaycastLayer >= 0) t.gameObject.layer = _ignoreRaycastLayer;
+        }
     }
 
     void OnMouseDrag()
     {
-        // Try snap first
         if (BuildingSystem.Instance.TryGetSnappedPos(out var snapped, transform))
         {
             lastSnapped = true;
@@ -53,23 +67,24 @@ public class ObjectDrag : MonoBehaviour
             return;
         }
 
-        // Not snappable: follow raw cursor ray (ignoring our own colliders)
         lastSnapped = false;
+
+        // Follow first non-self hit (for preview when not snappable)
         var cam = Camera.main;
         if (!cam) return;
 
-        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-        var hits = Physics.RaycastAll(ray, 1000f, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore)
+        var hits = Physics.RaycastAll(cam.ScreenPointToRay(Input.mousePosition), 1000f,
+                                      Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore)
                           .OrderBy(h => h.distance);
 
         foreach (var h in hits)
         {
-            if (h.collider && h.collider.transform.root == transform.root) continue; // skip self
+            if (h.collider && h.collider.transform.root == transform.root) continue;
             transform.position = Vector3.Lerp(transform.position, h.point, Time.deltaTime * speed);
             return;
         }
 
-        // Fallback: fixed depth in front of camera
+        // Fallback: fixed depth
         var p = cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10f));
         transform.position = Vector3.Lerp(transform.position, p, Time.deltaTime * speed);
     }
@@ -78,9 +93,13 @@ public class ObjectDrag : MonoBehaviour
     {
         if (outline) outline.enabled = false;
 
+        // Restore layers
+        for (int i = 0; i < _layered.Count; i++)
+            if (_layered[i]) _layered[i].gameObject.layer = _origLayers[i];
+        _layered.Clear(); _origLayers.Clear();
+
         if (lastSnapped)
         {
-            // Final snap + register into the grid; remain kinematic
             BuildingSystem.Instance.RegisterPlaced(gameObject);
             rb.isKinematic = true;
             rb.useGravity = false;
@@ -88,7 +107,6 @@ public class ObjectDrag : MonoBehaviour
         }
         else
         {
-            // Drop with physics
             rb.isKinematic = false;
             rb.useGravity = true;
             rb.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;

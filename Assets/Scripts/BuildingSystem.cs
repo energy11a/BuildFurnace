@@ -33,8 +33,7 @@ public class BuildingSystem : MonoBehaviour
     public Quaternion GridRotation => grid.transform.rotation;
     public void AlignToGrid(Transform t)
     {
-        if (!t) return;
-        t.rotation = grid.transform.rotation;
+        if (t) t.rotation = grid.transform.rotation;
     }
 
     Vector3Int OffsetFromNormalInGrid(Vector3 worldNormal)
@@ -49,10 +48,9 @@ public class BuildingSystem : MonoBehaviour
     float PlatformTopAt(Vector3 world)
     {
         if (Physics.Raycast(world + Vector3.up * 50f, Vector3.down, out var h, 200f, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
-        {
             if (h.collider.CompareTag(buildPlatformTag))
                 return h.collider.bounds.max.y;
-        }
+
         var c = GameObject.FindGameObjectWithTag(buildPlatformTag);
         return c ? c.GetComponent<Collider>().bounds.max.y : 0f;
     }
@@ -85,14 +83,12 @@ public class BuildingSystem : MonoBehaviour
         return key;
     }
 
-    // Strong occupancy guard: dictionary + physics overlap (aligned to grid)
+    // Dictionary + physics-overlap guard
     bool IsCellFree(Vector3Int key, float baseCenterY, Transform ignoreRoot)
     {
         if (placed.TryGetValue(key, out var existing))
-        {
             if (!(ignoreRoot && existing && existing.transform.root == ignoreRoot))
                 return false;
-        }
 
         var center = FromKeyToWorld(key, baseCenterY);
         var half = grid.cellSize * 0.5f * 0.98f;
@@ -106,7 +102,7 @@ public class BuildingSystem : MonoBehaviour
         return true;
     }
 
-    // Try to get a snapped position (platform or cube face). Returns true if snapping is possible.
+    // Scan through ALL hits until we find a cube face or the build platform.
     public bool TryGetSnappedPos(out Vector3 snappedPos, Transform ignore = null)
     {
         snappedPos = Vector3.zero;
@@ -114,55 +110,54 @@ public class BuildingSystem : MonoBehaviour
         var cam = Camera.main;
         if (!cam) return false;
 
-        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-        var hits = Physics.RaycastAll(ray, 1000f, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore)
+        var hits = Physics.RaycastAll(cam.ScreenPointToRay(Input.mousePosition), 1000f,
+                                      Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore)
                           .OrderBy(h => h.distance);
 
-        RaycastHit? pick = null;
-        foreach (var h in hits)
+        foreach (var hit in hits)
         {
-            if (ignore && h.collider && h.collider.transform.root == ignore.root) continue;
-            pick = h; break;
-        }
-        if (!pick.HasValue) return false;
+            if (ignore && hit.collider && hit.collider.transform.root == ignore.root) continue;
 
-        var hit = pick.Value;
+            // 1) Cube face
+            if (hit.collider.transform.root.CompareTag("Cube"))
+            {
+                var rootGO = hit.collider.transform.root.gameObject;
+                var hitKey  = GetKeyFor(rootGO);
+                var off     = OffsetFromNormalInGrid(hit.normal);
 
-        if (hit.collider.transform.root.CompareTag("Cube"))
-        {
-            var root = hit.collider.transform.root.gameObject;
-            var hitKey = GetKeyFor(root);
-            var off = OffsetFromNormalInGrid(hit.normal);
+                float baseCenterY = PlatformTopAt(hit.collider.transform.position) + grid.cellSize.y * 0.5f;
 
-            float baseCenterY = PlatformTopAt(hit.collider.transform.position) + grid.cellSize.y * 0.5f;
+                var target = hitKey + off;
+                int safety = 0;
+                while (!IsCellFree(target, baseCenterY, ignore) && safety++ < 256)
+                    target += off;
 
-            var target = hitKey + off;
-            int safety = 0;
-            while (!IsCellFree(target, baseCenterY, ignore) && safety++ < 256)
-                target += off;
+                snappedPos = FromKeyToWorld(target, baseCenterY);
+                return true;
+            }
 
-            snappedPos = FromKeyToWorld(target, baseCenterY);
-            return true;
-        }
-        else if (hit.collider.CompareTag(buildPlatformTag))
-        {
-            float baseCenterY = hit.collider.bounds.max.y + grid.cellSize.y * 0.5f;
+            // 2) Build platform
+            if (hit.collider.CompareTag(buildPlatformTag))
+            {
+                float baseCenterY = hit.collider.bounds.max.y + grid.cellSize.y * 0.5f;
 
-            var key = CellXZAt(hit.point);
-            key.y = 0;
+                var key = CellXZAt(hit.point);
+                key.y = 0;
 
-            int safety = 0;
-            while (!IsCellFree(key, baseCenterY, ignore) && safety++ < 256)
-                key.y += 1;
+                int safety = 0;
+                while (!IsCellFree(key, baseCenterY, ignore) && safety++ < 256)
+                    key.y += 1;
 
-            snappedPos = FromKeyToWorld(key, baseCenterY);
-            return true;
+                snappedPos = FromKeyToWorld(key, baseCenterY);
+                return true;
+            }
+
+            // Otherwise: ignore this hit and keep scanning
         }
 
         return false;
     }
 
-    // For hotkeys A/B fallback preview
     public Vector3 GetPlaceablePos(Transform ignore = null)
     {
         if (TryGetSnappedPos(out var pos, ignore)) return pos;
@@ -174,9 +169,8 @@ public class BuildingSystem : MonoBehaviour
     public void InitializeWithObject(GameObject prefab)
     {
         if (!prefab) return;
-
         var pos = GetPlaceablePos();
-        var obj = Instantiate(prefab, pos, GridRotation); // aligned spawn
+        var obj = Instantiate(prefab, pos, GridRotation);
         obj.tag = "Cube";
         if (!obj.GetComponent<ObjectDrag>()) obj.AddComponent<ObjectDrag>();
     }
@@ -194,14 +188,13 @@ public class BuildingSystem : MonoBehaviour
             key.y += 1;
 
         go.transform.position = FromKeyToWorld(key, baseCenterY);
-        AlignToGrid(go.transform);                 // keep aligned on place
+        AlignToGrid(go.transform);
         placed[key] = go;
     }
 
     public void Unregister(GameObject go)
     {
         if (!go) return;
-
         var key = GetKeyFor(go);
         if (placed.TryGetValue(key, out var g) && g == go)
             placed.Remove(key);

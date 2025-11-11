@@ -8,6 +8,7 @@ TagManager:
   - Cube
   - Particle
   - Fire
+  - Grass
   layers:
   - Default
   - TransparentFX

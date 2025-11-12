@@ -48,3 +48,4 @@ MonoBehaviour:
   spawnRadius: 5
   spawnRate: 0.2
   spawnHeight: 1
+  simulationDuration: 0

@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1233149941 &482766508811980512
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: DropGrass3_{482766508811980512}
+  m_AudioClip: {fileID: 8300000, guid: f2b023502755caa06af3d83bbf2596c1, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &6232431587438463801
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: DropGrass1_{6232431587438463801}
+  m_AudioClip: {fileID: 8300000, guid: 8979814dc818dce198ad740c08ebfee2, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1307931743 &6418180475301049370
+AudioRandomContainer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: DropGrass
+  m_Volume: 0
+  m_Pitch: 0
+  m_AutomaticTriggerTime: 0.05
+  m_LoopCount: 1
+  m_VolumeRandomizationRange: {x: -0.28880692, y: 18.483753}
+  m_PitchRandomizationRange: {x: -268.59207, y: 164.62097}
+  m_AutomaticTriggerTimeRandomizationRange: {x: 0, y: 0}
+  m_LoopCountRandomizationRange: {x: 0, y: 0}
+  m_Elements:
+  - {fileID: 6232431587438463801}
+  - {fileID: 6548146676978557354}
+  - {fileID: 482766508811980512}
+  m_AvoidRepeatingLast: 0
+  m_PlaybackMode: 2
+  m_TriggerMode: 1
+  m_AutomaticTriggerMode: 1
+  m_LoopMode: 1
+  m_VolumeRandomizationEnabled: 1
+  m_PitchRandomizationEnabled: 1
+  m_AutomaticTriggerTimeRandomizationEnabled: 0
+  m_LoopCountRandomizationEnabled: 0
+--- !u!1233149941 &6548146676978557354
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: DropGrass2_{6548146676978557354}
+  m_AudioClip: {fileID: 8300000, guid: 2984b5e343f68ec42b36182bc50d9c1e, type: 3}
+  m_Volume: 0
+  m_Enabled: 1

@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1233149941 &-5451495436393219555
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: BrickPlace2_{-5451495436393219555}
+  m_AudioClip: {fileID: 8300000, guid: fd6606fc0c55de86facca1ff5a3c41df, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-2430649369639311149
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: BrickPlace_{-2430649369639311149}
+  m_AudioClip: {fileID: 8300000, guid: d5a690bd3f89debc684c441b5f4bbaf5, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1307931743 &6418180475301049370
+AudioRandomContainer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: BrickPlace
+  m_Volume: -14.6
+  m_Pitch: 0
+  m_AutomaticTriggerTime: 0.05
+  m_LoopCount: 1
+  m_VolumeRandomizationRange: {x: -1.1552315, y: 11.552349}
+  m_PitchRandomizationRange: {x: -320.5775, y: 0}
+  m_AutomaticTriggerTimeRandomizationRange: {x: 0, y: 0}
+  m_LoopCountRandomizationRange: {x: 0, y: 0}
+  m_Elements:
+  - {fileID: -2430649369639311149}
+  - {fileID: -5451495436393219555}
+  - {fileID: 7721230082068427699}
+  m_AvoidRepeatingLast: 0
+  m_PlaybackMode: 1
+  m_TriggerMode: 1
+  m_AutomaticTriggerMode: 1
+  m_LoopMode: 1
+  m_VolumeRandomizationEnabled: 1
+  m_PitchRandomizationEnabled: 1
+  m_AutomaticTriggerTimeRandomizationEnabled: 0
+  m_LoopCountRandomizationEnabled: 0
+--- !u!1233149941 &7721230082068427699
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: BrickPlace3_{7721230082068427699}
+  m_AudioClip: {fileID: 8300000, guid: 6441e8132e40fc33089c99a1d982bc14, type: 3}
+  m_Volume: 0
+  m_Enabled: 1

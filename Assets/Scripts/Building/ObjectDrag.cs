@@ -8,6 +8,7 @@ namespace Building
     {
         public float speed = 1;
 
+        public Collider col;
         private Outline outline;
         private Rigidbody rb;
         private Camera cam;
@@ -38,8 +39,15 @@ namespace Building
             rb.constraints = RigidbodyConstraints.FreezeAll;
         }
 
+        bool IsPointInside(Collider col, Vector3 point)
+        {
+            Vector3 closest = col.ClosestPoint(point);
+            return Vector3.Distance(closest, point) < 0.0001f;
+        }
+
 
         public Vector3 targetPos;
+
         void OnMouseDrag()
         {
             var ray = cam.ScreenPointToRay(Input.mousePosition);
@@ -60,10 +68,10 @@ namespace Building
 
         void OnMouseUp()
         {
-            
             transform.position = targetPos;
             rb.constraints = RigidbodyConstraints.FreezeAll;
             if (outline) outline.enabled = false;
+            placeSound.Play();
         }
 
         private void OnDrawGizmos()

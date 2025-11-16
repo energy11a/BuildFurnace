@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: -9020629088190404064}
   - component: {fileID: 6819563264141342851}
   - component: {fileID: 6763237601746344081}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Cube
   m_Icon: {fileID: 0}
@@ -126,8 +126,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+  col: {fileID: 0}
   placeSound: {fileID: 6763237601746344081}
   grassSound: {fileID: 6819563264141342851}
+  targetPos: {x: 0, y: 0, z: 0}
 --- !u!114 &-1691943331074937888
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -281,7 +283,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 6418180475301049370, guid: 70c81db825468c0d5a0eb0c22126c4ba, type: 2}
+  m_Resource: {fileID: 6418180475301049370, guid: a9bc0ee6ef9d8ccd6978d47e66124008, type: 2}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1

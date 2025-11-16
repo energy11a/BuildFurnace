@@ -9,6 +9,8 @@ TagManager:
   - Particle
   - Fire
   - Grass
+  - FireParticle
+  - HeatParticle
   layers:
   - Default
   - TransparentFX
@@ -16,9 +18,9 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
+  - HeatCollider
+  - HeatParticle
+  - PlaceableLayer
   - 
   - 
   - 

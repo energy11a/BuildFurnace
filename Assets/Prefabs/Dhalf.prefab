@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -9020629088190404064}
   - component: {fileID: 6819563264141342851}
   - component: {fileID: 6763237601746344081}
-  - component: {fileID: 4553819193598098008}
+  - component: {fileID: 6026663893282954807}
   m_Layer: 0
   m_Name: Dhalf
   m_TagString: Cube
@@ -34,7 +34,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.5, y: 0.5, z: -0.5}
-  m_LocalScale: {x: 0.510447, y: 0.49347198, z: 0.80148}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.85384184}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -347,8 +347,8 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!64 &4553819193598098008
-MeshCollider:
+--- !u!65 &6026663893282954807
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -365,7 +365,6 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 1
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -462981019419857548, guid: 8d00e7429c9cf2d4cba47f4086bb8b23, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 2.0022664, y: 1.9915384, z: 1.1768552}
+  m_Center: {x: 0, y: 0, z: 0}

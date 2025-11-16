@@ -333,6 +333,7 @@ GameObject:
   - component: {fileID: 167165259}
   - component: {fileID: 167165261}
   - component: {fileID: 167165260}
+  - component: {fileID: 167165262}
   m_Layer: 0
   m_Name: LevelDonePanel
   m_TagString: Untagged
@@ -402,6 +403,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 167165258}
   m_CullTransparentMesh: 1
+--- !u!114 &167165262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 167165258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c8914d9087dc6543ac921e60aa6440d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextLevelButton: {fileID: 1744940867}
+  mainMenuButton: {fileID: 1844258490}
+  restartButton: {fileID: 1847738378}
+  nextLevelSceneName: Level2
 --- !u!1001 &228715644
 PrefabInstance:
   m_ObjectHideFlags: 0

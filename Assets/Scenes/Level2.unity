@@ -2298,7 +2298,6 @@ GameObject:
   - component: {fileID: 751424179}
   - component: {fileID: 751424178}
   - component: {fileID: 751424177}
-  - component: {fileID: 751424176}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -2306,18 +2305,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &751424176
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 751424175}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d403b291e2d14b07bb601a175e77d620, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &751424177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4161,9 +4148,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1484098178}
+  - component: {fileID: 1484098179}
   - component: {fileID: 1484098177}
   - component: {fileID: 1484098176}
-  - component: {fileID: 1484098175}
   m_Layer: 0
   m_Name: LevelDonePanel
   m_TagString: Untagged
@@ -4249,6 +4236,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 800, y: 960}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1484098179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1484098174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f74ac0cdd7b7997458dfe679fd1d091b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainMenuButton: {fileID: 1901740304}
+  restartButton: {fileID: 1128946034}
+  nextLevelButton: {fileID: 337138482}
+  mainMenuSceneName: MainMenu
+  nextLevelSceneName: Level3
 --- !u!1 &1505277723
 GameObject:
   m_ObjectHideFlags: 0
@@ -6760,3 +6764,5 @@ SceneRoots:
   - {fileID: 1837175026}
   - {fileID: 80369032}
   - {fileID: 1505277729}
+  - {fileID: 1274450814}
+  - {fileID: 825557918}

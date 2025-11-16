@@ -44,12 +44,13 @@ public class Fire : MonoBehaviour
 
         if (!hasWon && Temperature >= winTemperature)
         {
-            Debug.Log("WIN");
             hasWon = true;
+            Events.Instance?.RaiseLevelWon();
+
             if (winPanel != null)
+            {
                 winPanel.SetActive(true);
-            else
-                Debug.LogWarning("[Fire] Win reached, but winPanel is not assigned in the Inspector.");
+            }
         }
     }
 

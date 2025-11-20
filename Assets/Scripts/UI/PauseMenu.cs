@@ -5,7 +5,8 @@ using UnityEngine.UI;
 public class PauseMenu : MonoBehaviour
 {
     [Header("UI")]
-    [SerializeField] private GameObject pauseMenu;      // Canvas / panel pausimenüü jaoks
+    [SerializeField] private GameObject pauseMenu;      // Canvas / panel pausimenï¿½ï¿½ jaoks
+    [SerializeField] private GameObject levelWonPanel;
     [SerializeField] private Button settingsButton;
     [SerializeField] private Button mainMenuButton;
     [SerializeField] private Button levelsButton;
@@ -15,7 +16,8 @@ public class PauseMenu : MonoBehaviour
 
     void Start()
     {
-        // Pane pausimenüü alguses kinni
+        Events.Instance.LevelWon += OnLevelEnd;
+        // Pane pausimenï¿½ï¿½ alguses kinni
         if (pauseMenu != null)
             pauseMenu.SetActive(false);
 
@@ -30,6 +32,11 @@ public class PauseMenu : MonoBehaviour
             levelsButton.onClick.AddListener(OpenLevels);
     }
 
+   private void OnLevelEnd()
+    {
+        levelWonPanel.SetActive(true);
+        Time.timeScale = 0;
+    } 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -47,7 +54,7 @@ public class PauseMenu : MonoBehaviour
         if (pauseMenu != null)
             pauseMenu.SetActive(true);
 
-        Time.timeScale = 0f; // peatab mängu
+        Time.timeScale = 0f; // peatab mï¿½ngu
         AudioListener.pause = true; // peatab heli
     }
 
@@ -65,8 +72,8 @@ public class PauseMenu : MonoBehaviour
 
     private void OpenSettings()
     {
-        Debug.Log("Avatud seadete menüü!");
-        // Võid siin aktiveerida settings menüü UI
+        Debug.Log("Avatud seadete menï¿½ï¿½!");
+        // Vï¿½id siin aktiveerida settings menï¿½ï¿½ UI
         if (settingsMenu != null)
         {
             pauseMenu.SetActive(false);
@@ -78,9 +85,9 @@ public class PauseMenu : MonoBehaviour
 
     private void OpenMainMenu()
     {
-        Time.timeScale = 1f; // veendu, et mäng ei jää pausile
+        Time.timeScale = 1f; // veendu, et mï¿½ng ei jï¿½ï¿½ pausile
         AudioListener.pause = false;
-        SceneManager.LoadScene("MainMenu"); // pane siia oma menüü scene
+        SceneManager.LoadScene("MainMenu"); // pane siia oma menï¿½ï¿½ scene
     }
 
     private void OpenLevels()

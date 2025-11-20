@@ -7,6 +7,7 @@ public class Bootstrapper : MonoBehaviour
 
     private void Awake()
     {
+        Application.targetFrameRate = 144;
         if (Events.Instance == null)
         {
             var eventsGO = new GameObject("Events");

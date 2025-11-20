@@ -52,6 +52,12 @@ namespace Building
         void OnMouseDrag()
         {
             if (Events.Instance.simulating) return;
+            if (cam == null)
+            {
+                cam = Camera.main;
+                if (cam == null) return; 
+            }
+
             var ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit[] hits = Physics.RaycastAll(ray);
             Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));

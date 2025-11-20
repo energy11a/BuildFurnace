@@ -8,6 +8,5 @@ namespace Data
     {
         public List<GameObject> availableCubesPrefabs;
         
-        
     }
 }

@@ -10,7 +10,7 @@ public class LevelDoneMenu : MonoBehaviour
     [SerializeField] private Button restartButton;
 
     [Header("Next Level")]
-    [SerializeField] private string nextLevelSceneName; // Inspectoris määratav level, mis avatakse Next Level nupuga
+    [SerializeField] private string nextLevelSceneName; // Inspectoris mï¿½ï¿½ratav level, mis avatakse Next Level nupuga
 
     void Start()
     {
@@ -23,6 +23,8 @@ public class LevelDoneMenu : MonoBehaviour
         if (restartButton != null)
             restartButton.onClick.AddListener(RestartLevel);
     }
+
+    
 
     private void NextLevel()
     {
@@ -44,6 +46,6 @@ public class LevelDoneMenu : MonoBehaviour
 
     private void MainMenu()
     {
-        SceneManager.LoadScene("MainMenu"); // Pane oma menüü scene nimi
+        SceneManager.LoadScene("MainMenu"); 
     }
 }

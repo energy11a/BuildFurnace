@@ -8,6 +8,8 @@ public class Events : MonoBehaviour
     public event Action OnSimulationEnd;
     public bool simulating;
     public event Action<float> OnTempChange;
+    public event Action LevelWon;
+    public event Action<int> OnCoinsChanged;
 
     void Awake() { Instance = this; }
     public void RaiseSimulationStart()
@@ -24,4 +26,6 @@ public class Events : MonoBehaviour
     }
 
     public void RaiseTempChange(float t) => OnTempChange?.Invoke(t);
+    public void RaiseLevelWon() => LevelWon?.Invoke();
+    public void RaiseCoinsChanged(int totalCoins) => OnCoinsChanged?.Invoke(totalCoins);
 }

@@ -1,0 +1,31 @@
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class Bootstrapper : MonoBehaviour
+{
+    [SerializeField] private string firstSceneName = "MainMenu";
+
+    private void Awake()
+    {
+        if (Events.Instance == null)
+        {
+            var eventsGO = new GameObject("Events");
+            eventsGO.AddComponent<Events>();
+        }
+
+        if (Wallet.Instance == null)
+        {
+            var walletGO = new GameObject("Wallet");
+            walletGO.AddComponent<Wallet>();
+        }
+
+        if (!string.IsNullOrEmpty(firstSceneName))
+        {
+            SceneManager.LoadScene(firstSceneName, LoadSceneMode.Single);
+        }
+        else
+        {
+            Debug.LogError("[Bootstrapper] firstSceneName is empty. Set it in the Inspector.");
+        }
+    }
+}

@@ -34,6 +34,7 @@ namespace Building
 
         void OnMouseDown()
         {
+            if (Events.Instance.simulating) return;
             if (outline) outline.enabled = true;
             rb.rotation = Quaternion.identity;
             rb.constraints = RigidbodyConstraints.FreezeAll;
@@ -50,6 +51,7 @@ namespace Building
 
         void OnMouseDrag()
         {
+            if (Events.Instance.simulating) return;
             var ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit[] hits = Physics.RaycastAll(ray);
             Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
@@ -68,6 +70,7 @@ namespace Building
 
         void OnMouseUp()
         {
+            if (Events.Instance.simulating) return;
             transform.position = targetPos;
             rb.constraints = RigidbodyConstraints.FreezeAll;
             if (outline) outline.enabled = false;

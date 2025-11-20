@@ -18,12 +18,12 @@ TagManager:
   - 
   - Water
   - UI
-  - HeatCollider
+  - 
   - HeatParticle
   - PlaceableLayer
-  - 
-  - 
-  - 
+  - Particle
+  - Fire
+  - AirFireDraft
   - 
   - 
   - 

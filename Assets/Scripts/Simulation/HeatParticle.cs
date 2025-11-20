@@ -15,7 +15,7 @@ namespace Simulation
         public Vector3 moveDirection = Vector3.zero;
 
         [Tooltip("Strength of the movement force")]
-        public float moveForce = 1f;
+        public float moveForce = 10f;
 
         [Tooltip("How often (in seconds) to pick a new random direction")]
         public float directionChangeInterval = 1f;
@@ -23,14 +23,34 @@ namespace Simulation
         private Rigidbody rb;
         private float directionTimer;
 
-        private void Start()
+        void OnEnable()
         {
             rb = GetComponent<Rigidbody>();
-            directionTimer = directionChangeInterval;
+            if (Events.Instance) Events.Instance.OnSimulationEnd += OnSimEnd;
+        }
 
+        void OnDisable()
+        {
+            if (Events.Instance) Events.Instance.OnSimulationEnd -= OnSimEnd;
+        }
+
+        void OnDestroy()
+        {
+            if (Events.Instance) Events.Instance.OnSimulationEnd -= OnSimEnd;
+        }
+
+        void OnSimEnd()
+        {
+            if (this) Destroy(gameObject);
+        }
+
+        private void Start()
+        {
+            directionTimer = directionChangeInterval;
             SphereCollider col = GetComponent<SphereCollider>();
             float radius = col.radius * transform.lossyScale.x;
             area = (float)(0.5236 * Mathf.Pow(2 * radius, 3)); //Approximation
+            moveDirection = Random.onUnitSphere;
         }
 
         private void Update()

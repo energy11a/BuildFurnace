@@ -153,5 +153,5 @@ MonoBehaviour:
   area: 0
   heatDissipationRate: 45
   moveDirection: {x: 0, y: 0, z: 0}
-  moveForce: 1
-  directionChangeInterval: 1
+  moveForce: 10
+  directionChangeInterval: 0.2

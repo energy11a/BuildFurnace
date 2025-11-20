@@ -4,13 +4,12 @@ using UnityEngine.UI;
 
 public class LevelDoneMenu : MonoBehaviour
 {
-    [Header("Buttons")]
-    [SerializeField] private Button nextLevelButton;
+    [Header("Buttons")] [SerializeField] private Button nextLevelButton;
     [SerializeField] private Button mainMenuButton;
     [SerializeField] private Button restartButton;
 
-    [Header("Next Level")]
-    [SerializeField] private string nextLevelSceneName; // Inspectoris m��ratav level, mis avatakse Next Level nupuga
+    [Header("Next Level")] [SerializeField]
+    private string nextLevelSceneName; // Inspectoris m��ratav level, mis avatakse Next Level nupuga
 
     void Start()
     {
@@ -24,13 +23,14 @@ public class LevelDoneMenu : MonoBehaviour
             restartButton.onClick.AddListener(RestartLevel);
     }
 
-    
 
     private void NextLevel()
     {
         if (!string.IsNullOrEmpty(nextLevelSceneName))
         {
             SceneManager.LoadScene(nextLevelSceneName);
+            SceneManager.LoadSceneAsync("NeededInAll", LoadSceneMode.Additive);
+            SceneManager.LoadSceneAsync("UI", LoadSceneMode.Additive);
         }
         else
         {
@@ -42,10 +42,12 @@ public class LevelDoneMenu : MonoBehaviour
     {
         Scene currentScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(currentScene.name);
+        SceneManager.LoadSceneAsync("NeededInAll", LoadSceneMode.Additive);
+        SceneManager.LoadSceneAsync("UI", LoadSceneMode.Additive);
     }
 
     private void MainMenu()
     {
-        SceneManager.LoadScene("MainMenu"); 
+        SceneManager.LoadScene("MainMenu");
     }
 }

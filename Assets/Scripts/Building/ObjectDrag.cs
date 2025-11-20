@@ -59,7 +59,8 @@ namespace Building
             }
 
             var ray = cam.ScreenPointToRay(Input.mousePosition);
-            RaycastHit[] hits = Physics.RaycastAll(ray);
+            int mask = ~LayerMask.GetMask("IgnoreRaycast", "Walls");
+            RaycastHit[] hits = Physics.RaycastAll(ray,Mathf.Infinity, mask);
             Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
 
             foreach (var hit in hits)
@@ -69,6 +70,7 @@ namespace Building
                 targetPos = hit.point + hit.normal * .5f;
                 targetPos = BuildingSystem.Instance.GetNearestGridPosition(targetPos);
                 transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * speed);
+                transform.position = new Vector3(transform.position.x, Math.Max(0.5f, transform.position.y), transform.position.z);
                 return;
             }
         }

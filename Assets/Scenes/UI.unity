@@ -4094,7 +4094,7 @@ MonoBehaviour:
   nextLevelButton: {fileID: 1458814053}
   mainMenuButton: {fileID: 1803385331}
   restartButton: {fileID: 507983280}
-  nextLevelSceneName: Level3
+  nextLevelSceneName: Level1
 --- !u!114 &1730051187
 MonoBehaviour:
   m_ObjectHideFlags: 0

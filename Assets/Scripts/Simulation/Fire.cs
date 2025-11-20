@@ -75,7 +75,8 @@ namespace Simulation
                 heatParticle.temperature = 2 * oxygenConcentration;
             }
 
-        }
+            Events.Instance.RaiseOxygenLevelChanged((oxygenConcentration / maxOxygen) * 100);
+    }
 
         private float CalculateTemperature()
         {

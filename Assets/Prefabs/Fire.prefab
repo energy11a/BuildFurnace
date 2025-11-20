@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4001067841354543815}
   - component: {fileID: 7972158415379830935}
   - component: {fileID: 2603007418484623987}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Fire
   m_TagString: Fire
   m_Icon: {fileID: 0}
@@ -47,13 +47,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccfdd515a1c86fe4cbf0fad41f711d11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  heatParticlePrefab: {fileID: 235865417292753229, guid: 799ae94bacf5ac001b21aa7084c4b983, type: 3}
   particleTag: Particle
-  averagingWindow: 1
-  tempMax: 500
-  k: 0.5
-  ppsMax: 5000
-  smoothingAlpha: 0.2
-  coolingPerSecond: 30
+  winPanel: {fileID: 0}
+  winTemperature: 100
+  heatAreaVolume: 0
+  oxygenConcentration: 100
+  addPerOxygenParticle: 10
+  loseOxygenPerSecond: 10
+  heatSpawnCooldown: 0.2
+  roomTemperature: 20
 --- !u!135 &2603007418484623987
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -86,7 +89,7 @@ GameObject:
   - component: {fileID: 70966968233228542}
   - component: {fileID: 421434567362711992}
   - component: {fileID: 7040731016932159012}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: VFX_Fire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4919,7 +4922,7 @@ GameObject:
   - component: {fileID: 8951962884522237009}
   - component: {fileID: 5446005633950340084}
   - component: {fileID: 7814007092862396222}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SM_AFS_Log24_Mobile
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -4,6 +4,7 @@ using Random = UnityEngine.Random;
 
 public class ParticleSpawner : MonoBehaviour
 {
+    public static ParticleSpawner Instance;
     [Header("Spawn Settings")]
     public GameObject particlePrefab;
     public float spawnRadius = 5f;
@@ -14,7 +15,12 @@ public class ParticleSpawner : MonoBehaviour
     
     public float simulationDuration = 7;
     private float nextStateSwitch;
-    private bool simulating = false;
+    public bool simulating = false;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {

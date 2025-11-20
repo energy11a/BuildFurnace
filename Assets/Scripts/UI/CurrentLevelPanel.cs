@@ -13,6 +13,7 @@ public class CurrentLevelPanel : MonoBehaviour
     public GameObject goalText;
     public GameObject rewardText;
     public GameObject extraText;
+    public TMP_Text oxygenText;
 
     TMP_Text extraTmp;
 
@@ -24,6 +25,12 @@ public class CurrentLevelPanel : MonoBehaviour
     private void Start()
     {
         Events.Instance.OnTempChange += OnTempChange;
+        Events.Instance.OnOxygenChange += OnOxygenChange;
+    }
+
+    private void OnOxygenChange(float percentage)
+    {
+        oxygenText.text = "Oxygen: " + percentage.ToString("F2") + " %";
     }
 
     void OnDisable()

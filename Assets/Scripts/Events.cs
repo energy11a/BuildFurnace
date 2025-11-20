@@ -7,6 +7,7 @@ public class Events : MonoBehaviour
     public event Action OnSimulationStart;
     public event Action OnSimulationEnd;
     public bool simulating;
+    public event Action<float> OnOxygenChange;
     public event Action<float> OnTempChange;
     public float winTemperature;
     public event Action LevelWon;
@@ -33,6 +34,11 @@ public class Events : MonoBehaviour
             RaiseLevelWon();
         }
         OnTempChange?.Invoke(t);
+    }
+
+    public void RaiseOxygenLevelChanged(float t)
+    {
+        OnOxygenChange.Invoke(t);
     }
 
     public void RaiseLevelWon()

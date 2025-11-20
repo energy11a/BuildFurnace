@@ -59,7 +59,7 @@ namespace Building
             }
 
             var ray = cam.ScreenPointToRay(Input.mousePosition);
-            int mask = ~LayerMask.GetMask( "Walls");
+            int mask = ~LayerMask.GetMask( "Walls", "Ignore Raycast");
             RaycastHit[] hits = Physics.RaycastAll(ray,Mathf.Infinity, mask);
             Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
 

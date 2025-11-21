@@ -1,16 +1,10 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ControlSettings : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    // Connect buttons in tha editor
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
+
 }

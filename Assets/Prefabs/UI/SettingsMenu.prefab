@@ -256,6 +256,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4753767028954597290}
+  - component: {fileID: 8874450712627377946}
   m_Layer: 5
   m_Name: Graphics
   m_TagString: Untagged
@@ -283,6 +284,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &8874450712627377946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 585315372552271076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d4a6e9d8c815c64b85d2a155e70652a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &638880532781653704
 GameObject:
   m_ObjectHideFlags: 0
@@ -655,6 +668,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1569224106083019788}
+  - component: {fileID: 2132697451411239178}
   m_Layer: 5
   m_Name: Controls
   m_TagString: Untagged
@@ -682,6 +696,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2132697451411239178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1295033983031814092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96c6c69d68dd91a4c90666fc1446b708, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1313043979738322662
 GameObject:
   m_ObjectHideFlags: 0
@@ -4675,6 +4701,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1684989872851450309}
+  - component: {fileID: 3616784841366789994}
   m_Layer: 5
   m_Name: Audio
   m_TagString: Untagged
@@ -4702,6 +4729,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &3616784841366789994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6327057774747539305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2071a247057f4b4f98b878008523b6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6329441351718943145
 GameObject:
   m_ObjectHideFlags: 0
@@ -7220,17 +7259,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 0}
   settingsMenu: {fileID: 0}
-  settingsButton: {fileID: 0}
-  audioTab: {fileID: 0}
-  graphicsTab: {fileID: 0}
-  controlsTab: {fileID: 0}
-  audioBtn: {fileID: 0}
-  graphicsBtn: {fileID: 0}
-  controlsBtn: {fileID: 0}
-  generalSlider: {fileID: 0}
-  musicSlider: {fileID: 1674656228879742787}
-  sfxSlider: {fileID: 6771315943181338842}
-  audioMixer: {fileID: 24100000, guid: 82b4744c6c49e4d40b04abf83c279c50, type: 2}
+  closeButton: {fileID: 0}
+  audioTab: {fileID: 6327057774747539305}
+  graphicsTab: {fileID: 585315372552271076}
+  controlsTab: {fileID: 1295033983031814092}
+  audioBtn: {fileID: 5151078712379615636}
+  graphicsBtn: {fileID: 5931401572906501507}
+  controlsBtn: {fileID: 3944556008425923302}
 --- !u!1 &9169221755311050837
 GameObject:
   m_ObjectHideFlags: 0

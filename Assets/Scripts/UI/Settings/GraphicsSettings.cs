@@ -6,6 +6,6 @@ public class GraphicsSettings : MonoBehaviour
 {
     
 
-    // connect dropdowns not by code, but by editor
+    // connect dropdowns by editor
 
 }

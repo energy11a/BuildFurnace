@@ -2,13 +2,11 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
-public class SettingsMenu : MonoBehaviour
+
+public class AudioSettings : MonoBehaviour
 {
-    [Header("UI")]
-    [SerializeField] private GameObject pauseMenu;
-    [SerializeField] private GameObject settingsMenu;
-    [SerializeField] private Button settingsButton;
     [Header("UI Sliders")]
+    [SerializeField] private Slider generalSlider;
     [SerializeField] private Slider musicSlider;
     [SerializeField] private Slider sfxSlider;
 
@@ -17,44 +15,36 @@ public class SettingsMenu : MonoBehaviour
 
     private void Start()
     {
-        // Kui sliderid on olemas, ï¿½henda listenerid
+        // Kui sliderid on olemas, ühenda listenerid
         if (musicSlider != null)
             musicSlider.onValueChanged.AddListener(SetMusicVolume);
 
         if (sfxSlider != null)
             sfxSlider.onValueChanged.AddListener(SetSFXVolume);
 
-        // Algvï¿½ï¿½rtus slideritele
+        // Algväärtus slideritele
         float musicVol, sfxVol;
         if (audioMixer.GetFloat("Music", out musicVol))
             musicSlider.value = Mathf.Pow(10, musicVol / 20f); // log -> linear
 
         if (audioMixer.GetFloat("SFX", out sfxVol))
             sfxSlider.value = Mathf.Pow(10, sfxVol / 20f);
-        // Nupud
-        if (settingsButton != null)
-            settingsButton.onClick.AddListener(Close);
+        
     }
 
     public void SetMusicVolume(float value)
     {
-        // Slideri vï¿½ï¿½rtus 0-1 -> AudioMixer dB
-        float dB = Mathf.Lerp(-80f, 0f, value);
+        // Slideri väärtus 0-1 -> AudioMixer dB
+        float dB = Mathf.Clamp(-80f, 0f, value);
         audioMixer.SetFloat("Music", dB);
     }
 
     public void SetSFXVolume(float value)
     {
-        float dB = Mathf.Lerp(-80f, 0f, value);
+        float dB = Mathf.Clamp(-80f, 0f, value);
         audioMixer.SetFloat("SFX", dB);
     }
-    public void Close()
-    {
-        if (pauseMenu != null)
-        {
-            pauseMenu.SetActive(true);
-            Debug.Log("Avatud seadete menï¿½ï¿½!");
-            settingsMenu.SetActive(false);
-        }
-    }
+    
 }
+
+

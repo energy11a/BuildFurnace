@@ -9,6 +9,7 @@ public class CoinCounterUI : MonoBehaviour
     {
         if (coinText != null)
             coinText.text = Wallet.Instance ? Wallet.Instance.Coins.ToString() : "0";
+            coinText.text = "Total: " + coinText.text;
 
         if (Events.Instance != null)
             Events.Instance.OnCoinsChanged += OnCoinsChanged;

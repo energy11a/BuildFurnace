@@ -17,14 +17,14 @@ public class SettingsMenu : MonoBehaviour
 
     private void Start()
     {
-        // Kui sliderid on olemas, ühenda listenerid
+        // Kui sliderid on olemas, ï¿½henda listenerid
         if (musicSlider != null)
             musicSlider.onValueChanged.AddListener(SetMusicVolume);
 
         if (sfxSlider != null)
             sfxSlider.onValueChanged.AddListener(SetSFXVolume);
 
-        // Algväärtus slideritele
+        // Algvï¿½ï¿½rtus slideritele
         float musicVol, sfxVol;
         if (audioMixer.GetFloat("Music", out musicVol))
             musicSlider.value = Mathf.Pow(10, musicVol / 20f); // log -> linear
@@ -38,7 +38,7 @@ public class SettingsMenu : MonoBehaviour
 
     public void SetMusicVolume(float value)
     {
-        // Slideri väärtus 0-1 -> AudioMixer dB
+        // Slideri vï¿½ï¿½rtus 0-1 -> AudioMixer dB
         float dB = Mathf.Lerp(-80f, 0f, value);
         audioMixer.SetFloat("Music", dB);
     }
@@ -53,7 +53,7 @@ public class SettingsMenu : MonoBehaviour
         if (pauseMenu != null)
         {
             pauseMenu.SetActive(true);
-            Debug.Log("Avatud seadete menüü!");
+            Debug.Log("Avatud seadete menï¿½ï¿½!");
             settingsMenu.SetActive(false);
         }
     }

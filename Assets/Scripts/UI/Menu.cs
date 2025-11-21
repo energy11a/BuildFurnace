@@ -3,9 +3,9 @@ using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
-    // Selle saad määrata Inspectoris, et teada, mis scene avada Play nupu vajutamisel
+    // Selle saad mÃ¤Ã¤rata Inspectoris, et teada, mis scene avada Play nupu vajutamisel
     [SerializeField] private string levelSelectSceneName = "LevelSelect";
-    [SerializeField] private GameObject settingsMenu; // viide seadete menüüle
+    [SerializeField] private GameObject settingsMenu; // viide seadete menÃ¼Ã¼le
 
     // Play nupp
     public void PlayGame()
@@ -30,10 +30,10 @@ public class Menu : MonoBehaviour
     // Quit nupp
     public void QuitGame()
     {
-        Debug.Log("Mäng suletud!");
+        Debug.Log("Mï¿½ng suletud!");
         Application.Quit();
 
-        // Editoris testimiseks (Unity Editoris ei tööta Application.Quit)
+        // Editoris testimiseks (Unity Editoris ei tï¿½ï¿½ta Application.Quit)
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #endif

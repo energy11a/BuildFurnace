@@ -20,11 +20,14 @@ public class LevelButton : MonoBehaviour
     {
         if (!string.IsNullOrEmpty(levelSceneName))
         {
-            SceneManager.LoadScene(levelSceneName);
+            SceneManager.LoadSceneAsync(levelSceneName,LoadSceneMode.Single );
+            SceneManager.LoadSceneAsync("NeededInAll", LoadSceneMode.Additive);
+            SceneManager.LoadSceneAsync("UI",LoadSceneMode.Additive);
+            
         }
         else
         {
-            Debug.LogWarning("LevelButton: levelSceneName ei ole m‰‰ratud!");
+            Debug.LogWarning("LevelButton: levelSceneName ei ole m√§√§ratud!");
         }
     }
 }

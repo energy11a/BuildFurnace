@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public class LevelSelect : MonoBehaviour
 {
     [Header("Level Setup")]
-    [SerializeField] private Transform levelButtonsParent; // Alamelement, mis sisaldab kõiki level nuppe
+    [SerializeField] private Transform levelButtonsParent; // Alamelement, mis sisaldab kÃµiki level nuppe
     [SerializeField] private int levelsPerPage = 6;
 
     [Header("Navigation")]
@@ -20,7 +20,7 @@ public class LevelSelect : MonoBehaviour
 
     void Start()
     {
-        // Kõik alamelemendid levelButtonsParent alt lisatakse automaatselt listi
+        // Kï¿½ik alamelemendid levelButtonsParent alt lisatakse automaatselt listi
         foreach (Transform child in levelButtonsParent)
         {
             Button btn = child.GetComponent<Button>();
@@ -43,13 +43,13 @@ public class LevelSelect : MonoBehaviour
         int startIndex = currentPage * levelsPerPage;
         int endIndex = startIndex + levelsPerPage;
 
-        // Näita ainult praegusel lehel olevaid nuppe
+        // Nï¿½ita ainult praegusel lehel olevaid nuppe
         for (int i = 0; i < levelButtons.Count; i++)
         {
             levelButtons[i].gameObject.SetActive(i >= startIndex && i < endIndex);
         }
 
-        // Noolte nähtavus
+        // Noolte nï¿½htavus
         prevButton.gameObject.SetActive(currentPage > 0);
         nextButton.gameObject.SetActive(currentPage < totalPages - 1);
     }

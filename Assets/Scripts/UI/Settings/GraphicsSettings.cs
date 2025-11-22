@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
+
 
 public class GraphicsSettings : MonoBehaviour
 {
 
     [SerializeField] private TMP_Dropdown resDropdown;
     [SerializeField] private TMP_InputField fpsInputField;
+    [SerializeField] private Toggle fullscreenToggle;
 
     // List of resolutions, Width X Height
     List<string> resOptions = new List<string> {"1920x1080", "1600x900", "1280x800", "800x600" };
@@ -34,6 +35,14 @@ public class GraphicsSettings : MonoBehaviour
             fpsInputField.onEndEdit.AddListener(delegate
             {
                 SetFps(int.Parse(fpsInputField.text));
+            });
+        }
+
+        if (fullscreenToggle != null) 
+        {
+            fullscreenToggle.onValueChanged.AddListener(delegate
+            {
+                SetFullscreen(fullscreenToggle.isOn);
             });
         }
 
@@ -66,7 +75,6 @@ public class GraphicsSettings : MonoBehaviour
             return;
         }
         Application.targetFrameRate = amount;
-        Debug.Log(amount);
     }
 
 

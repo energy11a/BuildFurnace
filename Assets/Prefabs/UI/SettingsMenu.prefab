@@ -320,19 +320,7 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8874450712627377946}
-        m_TargetAssemblyTypeName: GraphicsSettings, Assembly-CSharp
-        m_MethodName: SetFullscreen
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_IsOn: 0
 --- !u!1 &585315372552271076
 GameObject:
@@ -385,6 +373,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resDropdown: {fileID: 3444105769616060208}
   fpsInputField: {fileID: 1201529652018230918}
+  fullscreenToggle: {fileID: 8447051157013465871}
 --- !u!1 &638880532781653704
 GameObject:
   m_ObjectHideFlags: 0

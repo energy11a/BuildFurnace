@@ -30,8 +30,6 @@ public class SettingsMenu : MonoBehaviour
 
 
 
-
-
     // Switches to tab
     private void SwitchTo(GameObject tab) 
     {

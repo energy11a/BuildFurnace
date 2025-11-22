@@ -15,6 +15,8 @@ public class SettingsMenu : MonoBehaviour
     [SerializeField] private Button graphicsBtn;
     [SerializeField] private Button controlsBtn;
 
+    [SerializeField] private Button backButton;
+    [SerializeField] private GameObject pauseMenu;
     private GameObject currentlyActive;
 
     private void Start()
@@ -23,6 +25,7 @@ public class SettingsMenu : MonoBehaviour
         audioBtn.onClick.AddListener(() => SwitchTo(audioTab));
         graphicsBtn.onClick.AddListener(() => SwitchTo(graphicsTab));
         controlsBtn.onClick.AddListener(() => SwitchTo(controlsTab));
+        backButton.onClick.AddListener(CloseSettings);
 
         SwitchTo(audioTab);
         
@@ -53,6 +56,8 @@ public class SettingsMenu : MonoBehaviour
     public void CloseSettings() 
     {
         gameObject.SetActive(false);
+        if (pauseMenu != null)
+            pauseMenu.SetActive(true);
     }
 
 }

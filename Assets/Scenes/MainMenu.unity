@@ -917,7 +917,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelSelectSceneName: LevelSelect
-  settingsMenu: {fileID: 0}
+  settingsMenu: {fileID: 1796986059}
 --- !u!114 &687400268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1783,6 +1783,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1704323329}
   m_CullTransparentMesh: 1
+--- !u!1 &1796986059 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9093939881036035942, guid: 377e7f4b45cc3014badba04d8430edce, type: 3}
+  m_PrefabInstance: {fileID: 122709606}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2074987860
 GameObject:
   m_ObjectHideFlags: 0

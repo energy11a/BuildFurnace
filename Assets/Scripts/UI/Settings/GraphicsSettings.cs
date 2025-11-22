@@ -9,6 +9,7 @@ public class GraphicsSettings : MonoBehaviour
 {
 
     [SerializeField] private TMP_Dropdown resDropdown;
+    [SerializeField] private TMP_InputField fpsInputField;
 
     // List of resolutions, Width X Height
     List<string> resOptions = new List<string> {"1920x1080", "1600x900", "1280x800", "800x600" };
@@ -23,12 +24,19 @@ public class GraphicsSettings : MonoBehaviour
             {
                 ChangeRes(resDropdown.value);
             });
-
             // Add the resolutions
             resDropdown.ClearOptions();
             resDropdown.AddOptions(resOptions);
-
         }
+
+        if (fpsInputField != null) 
+        {
+            fpsInputField.onEndEdit.AddListener(delegate
+            {
+                SetFps(int.Parse(fpsInputField.text));
+            });
+        }
+
     }
 
     public void ChangeRes(int value) 
@@ -52,12 +60,13 @@ public class GraphicsSettings : MonoBehaviour
 
     public void SetFps(int amount) 
     {
-        if (amount <= 5) 
+        if (amount <= 4) 
         {
             Debug.Log("FPS set too low!");
             return;
         }
         Application.targetFrameRate = amount;
+        Debug.Log(amount);
     }
 
 

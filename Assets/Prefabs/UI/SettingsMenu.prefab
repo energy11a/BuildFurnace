@@ -7211,7 +7211,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4349291943859840487
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7291,6 +7291,8 @@ MonoBehaviour:
   audioBtn: {fileID: 5151078712379615636}
   graphicsBtn: {fileID: 5931401572906501507}
   controlsBtn: {fileID: 3944556008425923302}
+  backButton: {fileID: 0}
+  pauseMenu: {fileID: 0}
 --- !u!1 &9169221755311050837
 GameObject:
   m_ObjectHideFlags: 0

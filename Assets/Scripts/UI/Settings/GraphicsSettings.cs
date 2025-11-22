@@ -10,12 +10,11 @@ public class GraphicsSettings : MonoBehaviour
 
     [SerializeField] private TMP_Dropdown resDropdown;
 
+    // List of resolutions, Width X Height
+    List<string> resOptions = new List<string> {"1920x1080", "1600x900", "1280x800", "800x600" };
+
     bool isFullscreen = false;
-    private int width = 0;
-    private int height = 0;
-
-
-
+    
     private void Start()
     {
         if (resDropdown != null) 
@@ -24,16 +23,23 @@ public class GraphicsSettings : MonoBehaviour
             {
                 ChangeRes(resDropdown.value);
             });
+
+            // Add the resolutions
+            resDropdown.ClearOptions();
+            resDropdown.AddOptions(resOptions);
+
         }
     }
 
     public void ChangeRes(int value) 
     {
+        string resString = resOptions[value];
+        string[] strings = resString.Split("x");
 
-
-        //width = w;
-        //height = h;
-        //Screen.SetResolution(w, h, isFullscreen);
+        int width = int.Parse(strings[0]);
+        int height = int.Parse(strings[1]);
+        Screen.SetResolution(width, height, isFullscreen);
+        
     }
 
     
@@ -49,6 +55,7 @@ public class GraphicsSettings : MonoBehaviour
         if (amount <= 5) 
         {
             Debug.Log("FPS set too low!");
+            return;
         }
         Application.targetFrameRate = amount;
     }

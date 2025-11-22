@@ -98,5 +98,17 @@ namespace Building
                 grassSound.Play();
             }
         }
+        void Update()
+        {
+            if (Events.Instance.simulating) return;
+
+            // R key rotates object 90 degrees clockwise around Y
+            if (Input.GetKeyDown(KeyCode.R) && outline.enabled)
+            {
+                float newY = transform.eulerAngles.y + 90f;
+                transform.rotation = Quaternion.Euler(0f, newY, 0f);
+            }
+        }
+
     }
 }

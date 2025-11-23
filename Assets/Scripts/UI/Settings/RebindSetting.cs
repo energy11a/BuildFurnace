@@ -25,7 +25,10 @@ public class RebindSetting : MonoBehaviour
 
         if (btn != null) 
         {
-            btn.onClick.AddListener(() => StartChange());
+            btn.onClick.AddListener(delegate 
+            {
+                StartChange();
+            });
         }
 
         ChangeBtnText();
@@ -49,6 +52,7 @@ public class RebindSetting : MonoBehaviour
         if (e.isKey) 
         {
             Debug.Log("Detected key code: " + e.keyCode + " Name: " + e.ToString());
+            
             Change(e.keyCode.ToString());
             currentlyChanging = false;
         }
@@ -56,11 +60,8 @@ public class RebindSetting : MonoBehaviour
 
     void Change(string s) 
     {
-        Debug.Log(s);
         string[] strings = path.Split("/");
         string newPath = strings[0] + "/" + s.ToLower();
-        Debug.Log("NewPath: " + newPath);
-
         inputAction.action.ApplyBindingOverride(newPath);
         waitForInputScreen.SetActive(false);
         ChangeBtnText();
@@ -69,6 +70,7 @@ public class RebindSetting : MonoBehaviour
     void ChangeBtnText() 
     {
         btnText.text = inputAction.action.bindings[0].effectivePath.Split("/")[1];
+        
     }
 
 }

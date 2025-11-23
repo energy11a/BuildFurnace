@@ -204,7 +204,7 @@ GameObject:
   m_Component:
   - component: {fileID: 117208444}
   m_Layer: 5
-  m_Name: MenuButtons
+  m_Name: ShopButtons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -379,10 +379,11 @@ GameObject:
   m_Component:
   - component: {fileID: 295834392}
   - component: {fileID: 295834395}
+  - component: {fileID: 295834396}
   - component: {fileID: 295834394}
   - component: {fileID: 295834393}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Item1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -452,7 +453,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 295834394}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: ShopUI, Assembly-CSharp
+        m_MethodName: BuyItem
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 200
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &295834394
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -491,6 +504,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 295834391}
   m_CullTransparentMesh: 1
+--- !u!114 &295834396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 295834391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c35e9bde027e36d46b60d3be146bb9a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: ExtraBlock
+  cost: 10
+  button: {fileID: 295834393}
+  titleText: {fileID: 1517967743}
+  costText: {fileID: 1517967743}
+  purchasedBadge: {fileID: 0}
 --- !u!1 &461123946
 GameObject:
   m_ObjectHideFlags: 0
@@ -945,9 +976,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: LevelSelect, Assembly-CSharp
-        m_MethodName: BackToMenu
+      - m_Target: {fileID: 1748270765}
+        m_TargetAssemblyTypeName: ShopUI, Assembly-CSharp
+        m_MethodName: GoBackToLevelSelect
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1590,7 +1621,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1458707498}
-  - component: {fileID: 1458707499}
   - component: {fileID: 1458707497}
   - component: {fileID: 1458707496}
   - component: {fileID: 1458707495}
@@ -1722,20 +1752,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1458707499
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1458707491}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60d335589680e3746b490129b856857e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  coinText: {fileID: 2058796976}
-  backButton: {fileID: 670481618}
 --- !u!1 &1517217894
 GameObject:
   m_ObjectHideFlags: 0
@@ -2017,11 +2033,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1694340647}
+  - component: {fileID: 1694340651}
   - component: {fileID: 1694340650}
   - component: {fileID: 1694340649}
   - component: {fileID: 1694340648}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Item2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2091,7 +2108,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1694340649}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: ShopUI, Assembly-CSharp
+        m_MethodName: BuyItem
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 300
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1694340649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2130,6 +2159,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1694340646}
   m_CullTransparentMesh: 1
+--- !u!114 &1694340651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1694340646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c35e9bde027e36d46b60d3be146bb9a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: ExtraBlock
+  cost: 300
+  button: {fileID: 1694340648}
+  titleText: {fileID: 461123948}
+  costText: {fileID: 461123948}
+  purchasedBadge: {fileID: 0}
 --- !u!1 &1748270762
 GameObject:
   m_ObjectHideFlags: 0
@@ -2140,6 +2187,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1748270763}
   - component: {fileID: 1748270764}
+  - component: {fileID: 1748270765}
   m_Layer: 5
   m_Name: ShopItems
   m_TagString: Untagged
@@ -2192,6 +2240,20 @@ MonoBehaviour:
   m_Spacing: {x: 20, y: 0}
   m_Constraint: 1
   m_ConstraintCount: 3
+--- !u!114 &1748270765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1748270762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60d335589680e3746b490129b856857e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinText: {fileID: 2058796976}
+  levelSelectSceneName: LevelSelect
 --- !u!1 &2058796974
 GameObject:
   m_ObjectHideFlags: 0
@@ -2348,5 +2410,5 @@ SceneRoots:
   m_Roots:
   - {fileID: 796252547}
   - {fileID: 469916883}
-  - {fileID: 839167091}
   - {fileID: 1458707498}
+  - {fileID: 839167091}

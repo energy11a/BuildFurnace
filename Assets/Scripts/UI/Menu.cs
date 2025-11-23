@@ -7,6 +7,11 @@ public class Menu : MonoBehaviour
     [SerializeField] private string levelSelectSceneName = "LevelSelect";
     [SerializeField] private GameObject settingsMenu; // viide seadete menüüle
 
+    private void Start()
+    {
+        settingsMenu.SetActive(false);
+    }
+
     // Play nupp
     public void PlayGame()
     {

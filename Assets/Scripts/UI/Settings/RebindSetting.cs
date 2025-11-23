@@ -7,10 +7,8 @@ using UnityEngine.UI;
 public class RebindSetting : MonoBehaviour
 {
     [SerializeField] private InputActionReference inputAction;
-
     [SerializeField] private Button btn;
     [SerializeField] private TMP_Text btnText;
-
     [SerializeField] private GameObject waitForInputScreen;
 
     private bool currentlyChanging = false;

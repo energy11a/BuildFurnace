@@ -13,6 +13,7 @@ public class LevelSelect : MonoBehaviour
     [SerializeField] private Button backButton;
     [SerializeField] private Button nextButton;
     [SerializeField] private Button prevButton;
+    [SerializeField] private Button shopButton;
 
     private List<Button> levelButtons = new List<Button>();
     private int currentPage = 0;
@@ -34,6 +35,7 @@ public class LevelSelect : MonoBehaviour
         backButton.onClick.AddListener(BackToMenu);
         nextButton.onClick.AddListener(NextPage);
         prevButton.onClick.AddListener(PreviousPage);
+        shopButton.onClick.AddListener(OpenShop);
 
         UpdatePage();
     }
@@ -76,4 +78,9 @@ public class LevelSelect : MonoBehaviour
     {
         SceneManager.LoadScene("MainMenu"); // Pane oma avamen?? scene nimi
     }
+    public void OpenShop()
+    {
+        SceneManager.LoadScene("Shop");
+    }
+
 }

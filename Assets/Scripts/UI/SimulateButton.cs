@@ -1,12 +1,15 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class SimulateButton : MonoBehaviour
 {
     private bool simulating = false;
     private TMP_Text text;
+
+    private InputAction simulateHotkey;
 
     private void Start()
     {
@@ -15,6 +18,23 @@ public class SimulateButton : MonoBehaviour
         
         Events.Instance.OnSimulationEnd += InstanceOnonSimulationEnd;
         Events.Instance.OnSimulationStart += InstanceOnOnSimulationStart;
+
+        simulateHotkey = InputSystem.actions.FindAction("Toggle_simulation");
+        
+        simulateHotkey.performed += OnHotkeyPressed;
+
+    }
+
+    private void OnDestroy()
+    {
+        simulateHotkey.performed -= OnHotkeyPressed;
+    }
+
+
+    // Start simulation hotkey
+    void OnHotkeyPressed(InputAction.CallbackContext context)
+    {
+        OnButtonClick();
     }
 
     private void InstanceOnOnSimulationStart()
@@ -36,4 +56,6 @@ public class SimulateButton : MonoBehaviour
         else
             Events.Instance.RaiseSimulationEnd();
     }
+
+
 }

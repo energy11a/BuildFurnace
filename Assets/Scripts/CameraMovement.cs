@@ -1,4 +1,6 @@
+using Unity.VisualScripting.InputSystem;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class IsoCameraOrbit : MonoBehaviour
 {
@@ -6,7 +8,11 @@ public class IsoCameraOrbit : MonoBehaviour
     public float distance = 14f;
     public float pitch = 30f;
     public float switchDuration = 0.35f;
-    
+
+    // camera controls
+    private InputAction camLeft;
+    private InputAction camRight;
+
     //Audio
     private AudioSource cameraSwish;
 
@@ -21,13 +27,37 @@ public class IsoCameraOrbit : MonoBehaviour
 
     void Start()
     {
+        // Gotta find the actions first
+        camLeft = InputSystem.actions.FindAction("Camera_left");
+        camRight = InputSystem.actions.FindAction("Camera_right");
+
+        camLeft.performed += OnCamLeft;
+        camRight.performed += OnCamRight;
+
+
         cameraSwish = GetComponent<AudioSource>();
     }
 
-    void Update()
+    private void OnDestroy()
     {
-        if (Input.GetKeyDown(KeyCode.E)) BeginTurn(-1);
-        if (Input.GetKeyDown(KeyCode.Q)) BeginTurn(1);
+        camLeft.performed -= OnCamLeft;
+        camRight.performed -= OnCamRight;
+    }
+
+    void OnCamLeft(InputAction.CallbackContext context) 
+    {
+        if (context.performed) 
+        {
+            BeginTurn(1);
+        }
+    }
+
+    void OnCamRight(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            BeginTurn(-1);
+        }
     }
 
     void LateUpdate()

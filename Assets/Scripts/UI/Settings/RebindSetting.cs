@@ -18,10 +18,20 @@ public class RebindSetting : MonoBehaviour
 
     private void Start()
     {
+
+        if (btnText == null && inputAction == null)
+        {
+            Debug.LogError("Missing references!");
+            return;
+        }
+
         if (btn != null) 
         {
             btn.onClick.AddListener(() => StartChange());
         }
+
+        ChangeBtnText();
+
     }
 
 
@@ -30,7 +40,7 @@ public class RebindSetting : MonoBehaviour
         path = inputAction.action.bindings[0].effectivePath; //  <Keyboard>/e
         Debug.Log("Current path: " + path);
         currentlyChanging = true;
-
+        waitForInputScreen.SetActive(true);
     }
 
     private void OnGUI()
@@ -42,7 +52,7 @@ public class RebindSetting : MonoBehaviour
         {
             Debug.Log("Detected key code: " + e.keyCode + " Name: " + e.ToString());
             Change(e.keyCode.ToString());
-            currentlyChanging=false;
+            currentlyChanging = false;
         }
     }
 
@@ -54,6 +64,13 @@ public class RebindSetting : MonoBehaviour
         Debug.Log("NewPath: " + newPath);
 
         inputAction.action.ApplyBindingOverride(newPath);
+        waitForInputScreen.SetActive(false);
+        ChangeBtnText();
+    }
+
+    void ChangeBtnText() 
+    {
+        btnText.text = inputAction.action.bindings[0].effectivePath.Split("/")[1];
     }
 
 }

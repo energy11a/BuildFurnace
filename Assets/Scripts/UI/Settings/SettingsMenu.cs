@@ -27,6 +27,9 @@ public class SettingsMenu : MonoBehaviour
         controlsBtn.onClick.AddListener(() => SwitchTo(controlsTab));
         backButton.onClick.AddListener(CloseSettings);
 
+        controlsTab.SetActive(false);
+        graphicsTab.SetActive(false);
+
         SwitchTo(audioTab);
         
     }

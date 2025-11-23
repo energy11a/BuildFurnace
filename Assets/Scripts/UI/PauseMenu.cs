@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -13,6 +14,8 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private GameObject settingsMenu;
 
     private bool isPaused = false;
+
+    private InputAction pauseAction;
 
     void Start()
     {
@@ -30,22 +33,43 @@ public class PauseMenu : MonoBehaviour
 
         if (levelsButton != null)
             levelsButton.onClick.AddListener(OpenLevels);
+
+        pauseAction = InputSystem.actions.FindAction("Pause");
+
+        pauseAction.performed += OnHotkeyPressed;
     }
 
-   private void OnLevelEnd()
+    private void OnDestroy()
+    {
+        pauseAction.performed -= OnHotkeyPressed;
+    }
+
+    // Pause hotkey
+    void OnHotkeyPressed(InputAction.CallbackContext context) 
+    {
+        TogglePause();
+    }
+
+    private void OnLevelEnd()
     {
         levelWonPanel.SetActive(true);
         Time.timeScale = 0;
     } 
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (!isPaused)
-                PauseGame();
-            else
-                ResumeGame();
+            TogglePause();
         }
+    }
+
+    void TogglePause() 
+    {
+        if (!isPaused)
+            PauseGame();
+        else
+            ResumeGame();
     }
 
     private void PauseGame()

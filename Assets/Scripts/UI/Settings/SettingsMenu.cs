@@ -31,6 +31,11 @@ public class SettingsMenu : MonoBehaviour
         graphicsTab.SetActive(false);
 
         SwitchTo(audioTab);
+        
+
+        
+
+
     }
 
 

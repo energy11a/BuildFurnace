@@ -37,6 +37,13 @@ public class IsoCameraOrbit : MonoBehaviour
 
         cameraSwish = GetComponent<AudioSource>();
     }
+
+    private void OnDestroy()
+    {
+        camLeft.performed -= OnCamLeft;
+        camRight.performed -= OnCamRight;
+    }
+
     void OnCamLeft(InputAction.CallbackContext context) 
     {
         if (context.performed) 

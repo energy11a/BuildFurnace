@@ -76,7 +76,7 @@ namespace Simulation
             }
 
             Events.Instance.RaiseOxygenLevelChanged((oxygenConcentration / maxOxygen) * 100);
-    }
+        }
 
         private float CalculateTemperature()
         {

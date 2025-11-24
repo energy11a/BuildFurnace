@@ -26,6 +26,7 @@ public class CurrentLevelPanel : MonoBehaviour
     {
         Events.Instance.OnTempChange += OnTempChange;
         Events.Instance.OnOxygenChange += OnOxygenChange;
+        Debug.Log($"[DEBUG] Time.timeScale = {Time.timeScale}");
     }
 
     private void OnOxygenChange(float percentage)

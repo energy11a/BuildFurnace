@@ -28,9 +28,11 @@ public class LevelDoneMenu : MonoBehaviour
     {
         if (!string.IsNullOrEmpty(nextLevelSceneName))
         {
+            Time.timeScale = 1f;
+            AudioListener.pause = false;
             SceneManager.LoadScene(nextLevelSceneName);
             SceneManager.LoadSceneAsync("NeededInAll", LoadSceneMode.Additive);
-            SceneManager.LoadSceneAsync("UI", LoadSceneMode.Additive);
+            SceneManager.LoadSceneAsync("UI", LoadSceneMode.Single);
         }
         else
         {
@@ -42,12 +44,23 @@ public class LevelDoneMenu : MonoBehaviour
     {
         Scene currentScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(currentScene.name);
+        Time.timeScale = 1f;
+        AudioListener.pause = false;
         SceneManager.LoadSceneAsync("NeededInAll", LoadSceneMode.Additive);
-        SceneManager.LoadSceneAsync("UI", LoadSceneMode.Additive);
+        SceneManager.LoadSceneAsync("UI", LoadSceneMode.Single);
     }
 
     private void MainMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.sceneLoaded += ResetTimeScale;
+        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+    }
+
+    private void ResetTimeScale(Scene scene, LoadSceneMode mode)
+    {
+        Time.timeScale = 1f;
+        AudioListener.pause = false;
+        Debug.Log($"[DEBUG] Time.timeScale reset after loading {scene.name}");
+        SceneManager.sceneLoaded -= ResetTimeScale;
     }
 }

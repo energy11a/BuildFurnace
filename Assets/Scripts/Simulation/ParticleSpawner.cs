@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -18,6 +19,7 @@ public class ParticleSpawner : MonoBehaviour
     public float simulationDuration = 7;
     private float nextStateSwitch;
     public bool simulating = false;
+    private readonly List<GameObject> spawnedParticles = new List<GameObject>();
 
     private void Awake()
     {
@@ -32,8 +34,17 @@ public class ParticleSpawner : MonoBehaviour
 
     private void EndSimulation()
     {
-        simulating = false;
-        nextStateSwitch = Time.time;
+
+        foreach (var obj in spawnedParticles)
+        {
+            if (obj)
+            {
+                var rb = obj.GetComponent<Rigidbody>();
+                if (rb) rb.isKinematic = true;
+                Destroy(obj);
+            }
+        }
+
     }
     private void StartSimulation()
     {
@@ -53,7 +64,7 @@ public class ParticleSpawner : MonoBehaviour
             Debug.Log("Simulation end");
             return;
         }
-        
+
         if (Time.time >= nextSpawnTime)
         {
             nextSpawnTime = Time.time + spawnRate;
@@ -61,7 +72,8 @@ public class ParticleSpawner : MonoBehaviour
             Vector3 randomPos = transform.position + Random.insideUnitSphere * spawnRadius;
             randomPos.y = Mathf.Max(randomPos.y, spawnHeight);
 
-            Instantiate(particlePrefab, randomPos, Quaternion.identity);
+            GameObject particle = Instantiate(particlePrefab, randomPos, Quaternion.identity);
+            spawnedParticles.Add(particle);
         }
     }
 }

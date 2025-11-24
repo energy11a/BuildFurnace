@@ -725,12 +725,20 @@ PrefabInstance:
       value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 7972158415379830935, guid: 7fdd3239fff3bb1468068f9560cdea49, type: 3}
+      propertyPath: startingOxygen
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7972158415379830935, guid: 7fdd3239fff3bb1468068f9560cdea49, type: 3}
+      propertyPath: roomTemperature
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7972158415379830935, guid: 7fdd3239fff3bb1468068f9560cdea49, type: 3}
       propertyPath: loseOxygenPerSecond
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7972158415379830935, guid: 7fdd3239fff3bb1468068f9560cdea49, type: 3}
       propertyPath: addPerOxygenParticle
-      value: 20
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -902,6 +910,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   extraBlockPrefab: {fileID: 7969576972883089186, guid: 999cd4b5bbb980578b83f2e3a4f4365d, type: 3}
+  extraBlockSpawnPoint: {fileID: 0}
 --- !u!4 &1189244101
 Transform:
   m_ObjectHideFlags: 0
@@ -1090,7 +1099,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   simulating: 0
-  winTemperature: 100
+  winTemperature: 60
 --- !u!4 &1684813986 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4001067841354543815, guid: 7fdd3239fff3bb1468068f9560cdea49, type: 3}
@@ -1263,6 +1272,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2807463398716074923, guid: b580527911b70fa4f9b789c0d2d07924, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2807463398716074923, guid: b580527911b70fa4f9b789c0d2d07924, type: 3}
       propertyPath: spawnRate
       value: 0.1

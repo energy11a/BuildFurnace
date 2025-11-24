@@ -1099,7 +1099,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   simulating: 0
-  winTemperature: 60
+  winTemperature: 100
 --- !u!4 &1684813986 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4001067841354543815, guid: 7fdd3239fff3bb1468068f9560cdea49, type: 3}
@@ -1274,7 +1274,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2807463398716074923, guid: b580527911b70fa4f9b789c0d2d07924, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2807463398716074923, guid: b580527911b70fa4f9b789c0d2d07924, type: 3}
       propertyPath: spawnRate

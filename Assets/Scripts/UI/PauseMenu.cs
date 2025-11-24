@@ -34,8 +34,8 @@ public class PauseMenu : MonoBehaviour
 
    private void OnLevelEnd()
     {
+        Time.timeScale = 0f;
         levelWonPanel.SetActive(true);
-        Time.timeScale = 0;
     } 
     void Update()
     {
@@ -81,8 +81,6 @@ public class PauseMenu : MonoBehaviour
             pauseMenu.SetActive(false);
             settingsMenu.SetActive(true);
         }
-            
-            
     }
 
     private void OpenMainMenu()

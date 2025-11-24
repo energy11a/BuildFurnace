@@ -1,33 +1,42 @@
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LevelButton : MonoBehaviour
 {
-    [SerializeField] private string levelSceneName; // Scene nimi, mida see nupp avab
-
+    [SerializeField] private string levelSceneName;
+    [Header("Audio")]
+    [SerializeField] private AudioClip startLevelSound;
+    private AudioSource audioSource;
     private Button button;
 
     void Awake()
     {
         button = GetComponent<Button>();
+        audioSource = GetComponent<AudioSource>();
 
         if (button != null)
             button.onClick.AddListener(OpenLevel);
     }
 
-    void OpenLevel()
+    private void OpenLevel()
     {
-        if (!string.IsNullOrEmpty(levelSceneName))
+        if (startLevelSound && audioSource)
         {
-            SceneManager.LoadSceneAsync(levelSceneName,LoadSceneMode.Single );
-            SceneManager.LoadSceneAsync("NeededInAll", LoadSceneMode.Additive);
-            SceneManager.LoadSceneAsync("UI",LoadSceneMode.Additive);
-            
+            audioSource.PlayOneShot(startLevelSound);
+            DontDestroyOnLoad(audioSource.gameObject);
+            StartCoroutine(DestroyAfterClip(startLevelSound.length));
         }
-        else
-        {
-            Debug.LogWarning("LevelButton: levelSceneName ei ole määratud!");
-        }
+
+        SceneManager.LoadSceneAsync(levelSceneName, LoadSceneMode.Single);
+        SceneManager.LoadSceneAsync("NeededInAll", LoadSceneMode.Additive);
+        SceneManager.LoadSceneAsync("UI", LoadSceneMode.Additive);
+    }
+
+    private System.Collections.IEnumerator DestroyAfterClip(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Destroy(audioSource.gameObject);
     }
 }

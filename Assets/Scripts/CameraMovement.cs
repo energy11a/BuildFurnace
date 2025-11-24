@@ -30,18 +30,21 @@ public class IsoCameraOrbit : MonoBehaviour
         // Gotta find the actions first
         camLeft = InputSystem.actions.FindAction("Camera_left");
         camRight = InputSystem.actions.FindAction("Camera_right");
+        if (camLeft != null)
+            camLeft.performed += OnCamLeft;
 
-        camLeft.performed += OnCamLeft;
-        camRight.performed += OnCamRight;
-
-
+        if (camRight != null)
+            camRight.performed += OnCamRight;
         cameraSwish = GetComponent<AudioSource>();
     }
 
     private void OnDestroy()
     {
-        camLeft.performed -= OnCamLeft;
-        camRight.performed -= OnCamRight;
+        if (camLeft != null)
+            camLeft.performed -= OnCamLeft;
+
+        if (camRight != null)
+            camRight.performed -= OnCamRight;
     }
 
     void OnCamLeft(InputAction.CallbackContext context) 

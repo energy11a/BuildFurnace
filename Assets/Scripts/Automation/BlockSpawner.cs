@@ -25,12 +25,11 @@ namespace Automation
                 return;
             }
             Instance = this;
-            Events events = Events.Instance;
 
             freePos = new Vector3(-distanceAlongX, -distanceAlongX, distanceAlongZ);
             gridStartPos = GetNearestGridPosition(transform.position);
 
-            SpawnBlocks(events.levels[events.currentLevel].buildingBlocks);
+            SpawnBlocks(Events.Instance.level.buildingBlocks);
         }
 
         private void OnDrawGizmos()
@@ -52,7 +51,7 @@ namespace Automation
 
         private void SpawnBlock(BlockData block){
             Vector3 pos = gridStartPos + freePos + new Vector3(UnityEngine.Random.Range(0,offset),0,UnityEngine.Random.Range(0,offset));
-            GameObject spawned = Instantiate(blockPrefab, pos, Quaternion.identity);
+            GameObject spawned = Instantiate(blockPrefab, pos, Quaternion.identity );
 
             spawned.GetComponent<MeshFilter>().mesh = block.mesh;
             spawned.GetComponent<Renderer>().material = block.material;

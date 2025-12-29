@@ -22,7 +22,7 @@ public class LevelRewarder : MonoBehaviour
             return;
         }
 
-        int reward = Mathf.Max(0, levelPanel.rewardAmount);
+        int reward = Mathf.Max(0, Events.Instance.level.reward);
         if (Wallet.Instance != null)
         {
             Wallet.Instance.Add(reward);

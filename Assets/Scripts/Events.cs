@@ -18,6 +18,7 @@ public class Events : MonoBehaviour
     [HideInInspector]public event Action<int> OnCoinsChanged;
 
     public List<LevelData> levels;
+    public LevelData level;
     [HideInInspector]public int currentLevel;
 
     //Audio
@@ -60,7 +61,7 @@ public class Events : MonoBehaviour
 
     public void RaiseOxygenLevelChanged(float t)
     {
-        OnOxygenChange.Invoke(t);
+        OnOxygenChange?.Invoke(t);
     }
 
     public void RaiseLevelWon()
@@ -74,7 +75,7 @@ public class Events : MonoBehaviour
     public void LoadLevel(int index)
     {
         currentLevel = index;
-        LevelData level = levels[currentLevel];
+        level = levels[currentLevel];
         
         if (startLevelSound) audioSource.PlayOneShot(startLevelSound);
 

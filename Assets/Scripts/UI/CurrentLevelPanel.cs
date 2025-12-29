@@ -1,54 +1,45 @@
 using System;
+using Data;
 using TMPro;
 using UnityEngine;
 
 public class CurrentLevelPanel : MonoBehaviour
 {
-    public int currentLevel;
-    public int goalTemp;
-    public int rewardAmount;
-    public string extraInfo;
-
-    public GameObject levelText;
-    public GameObject goalText;
-    public GameObject rewardText;
-    public GameObject extraText;
+    public TMP_Text levelText;
+    public TMP_Text tempText;
     public TMP_Text oxygenText;
 
     TMP_Text extraTmp;
 
     void Awake()
     {
-        if (extraText) extraTmp = extraText.GetComponent<TMP_Text>();
+        if (tempText) extraTmp = tempText.GetComponent<TMP_Text>();
     }
-
-    private void Start()
-    {
-        Events.Instance.OnTempChange += OnTempChange;
-        Events.Instance.OnOxygenChange += OnOxygenChange;
-        Debug.Log($"[DEBUG] Time.timeScale = {Time.timeScale}");
+    void Start(){
+        LevelData level = Events.Instance.level;
+        levelText.text = level.LevelName;
+        OnTempChange(0);
+        OnOxygenChange(0);
     }
 
     private void OnOxygenChange(float percentage)
     {
-        oxygenText.text = "Oxygen: " + percentage.ToString("F2") + " %";
+        oxygenText.text = "O2: " + percentage.ToString("F2") + " %";
+    }
+    void OnEnable()
+    {
+        Events.Instance.OnTempChange += OnTempChange;
+        Events.Instance.OnOxygenChange += OnOxygenChange;
     }
 
     void OnDisable()
     {
-        if (Events.Instance != null) Events.Instance.OnTempChange -= OnTempChange;
-    }
-
-    public void ChangeDesc(int level, int goal, int reward, string extra = "")
-    {
-        currentLevel = level;
-        goalTemp = goal;
-        rewardAmount = reward;
-        extraInfo = extra;
+        Events.Instance.OnTempChange -= OnTempChange;
+        Events.Instance.OnOxygenChange -= OnOxygenChange;
     }
 
     void OnTempChange(float t)
     {
-        if (extraTmp) extraTmp.text = $"Current temp: {t:F0} °C";
+        if (extraTmp) extraTmp.text = $"{t:F0} / {Events.Instance.level.winTemperature} °C";
     }
 }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae6baacbec3a336e6b0be3271c09e51f, type: 3}
   m_Name: Wedge
   m_EditorClassIdentifier: Assembly-CSharp::BlockData
-  mesh: {fileID: -5495902117074765545, guid: c1868f9b43bec5e7f99068d2b70047ea, type: 3}
+  mesh: {fileID: -122999701322966394, guid: e05c93ecfad81fbdbb5d07c14aec5356, type: 3}
   material: {fileID: 2100000, guid: 5dc91afaccd4cd3a1b441d8dc884978d, type: 2}
   size: {x: 1, y: 1, z: 1}
   cost: 5

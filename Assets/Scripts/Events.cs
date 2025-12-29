@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Automation;
 using Data;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -18,6 +19,7 @@ public class Events : MonoBehaviour
 
     public List<LevelData> levels;
     [HideInInspector]public int currentLevel;
+
     //Audio
     [SerializeField] private AudioClip startLevelSound;
     private AudioSource audioSource;
@@ -31,6 +33,7 @@ public class Events : MonoBehaviour
         }
 
         Instance = this;
+        audioSource = GetComponent<AudioSource>();
         DontDestroyOnLoad(gameObject);
     }
 
@@ -62,10 +65,8 @@ public class Events : MonoBehaviour
 
     public void RaiseLevelWon()
     {
+        RaiseSimulationEnd();
         LevelWon?.Invoke();
-    }
-    private void Start(){
-        audioSource = GetComponent<AudioSource>();
     }
 
     public void RaiseCoinsChanged(int totalCoins) => OnCoinsChanged?.Invoke(totalCoins);
@@ -76,9 +77,6 @@ public class Events : MonoBehaviour
         LevelData level = levels[currentLevel];
         
         if (startLevelSound) audioSource.PlayOneShot(startLevelSound);
-        foreach (CubeEntry cubeEntry in level.buildingBlocks){
-            
-        }
 
         Time.timeScale = 1f;
         AudioListener.pause = false;

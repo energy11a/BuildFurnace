@@ -34,11 +34,12 @@ public class LevelItemManager : MonoBehaviour
         if (appliedThisLevel) return; // apply once per level start
         appliedThisLevel = true;
 
-        Debug.Log("[LevelItemManager] Applying purchased items…");
+        Debug.Log("[LevelItemManager] Applying purchased items");
 
         int extraBlockCount = TempInventory.PurchasedItems.Count(id => id == "ExtraBlock");
-        for (int i = 0; i < extraBlockCount; i++)
+        for (int i = 0; i < extraBlockCount; i++){
             SpawnExtraBlock(i);
+        }
     }
 
     private void SpawnExtraBlock(int index)

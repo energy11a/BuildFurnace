@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae6baacbec3a336e6b0be3271c09e51f, type: 3}
   m_Name: Cube
   m_EditorClassIdentifier: Assembly-CSharp::BlockData
-  mesh: {fileID: -5495902117074765545, guid: 0bdc842040593a624a684a31d903c965, type: 3}
+  mesh: {fileID: -5495902117074765545, guid: e438ab71e208f71f3a74a04f7d9c7d26, type: 3}
   material: {fileID: 2100000, guid: 5dc91afaccd4cd3a1b441d8dc884978d, type: 2}
   size: {x: 1, y: 1, z: 1}
   cost: 0
-  bought: 0
+  bought: 1

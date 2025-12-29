@@ -17,6 +17,6 @@ namespace Data
 }
 [System.Serializable]
 public class CubeEntry{
-    public GameObject cubePrefab;
+    public BlockData BlockData;
     public int count;
 }

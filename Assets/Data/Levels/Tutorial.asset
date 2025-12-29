@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30a417541f2f4bcda59a9e9960812e6f, type: 3}
   m_Name: Tutorial
   m_EditorClassIdentifier: Assembly-CSharp::Data.LevelData
-  buildingBlocks: []
+  buildingBlocks:
+  - BlockData: {fileID: 11400000, guid: bd50abd26ebd71be79a44ebbbca542f8, type: 2}
+    count: 5
   SceneName: Tutorial
   LevelName: Tutorial
   winTemperature: 100

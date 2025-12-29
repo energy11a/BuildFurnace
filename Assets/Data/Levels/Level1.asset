@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30a417541f2f4bcda59a9e9960812e6f, type: 3}
   m_Name: Level1
   m_EditorClassIdentifier: Assembly-CSharp::Data.LevelData
-  buildingBlocks: []
+  buildingBlocks:
+  - cubePrefab: {fileID: 0}
+    count: 0
   SceneName: Level1
   LevelName: Level 1
   winTemperature: 150

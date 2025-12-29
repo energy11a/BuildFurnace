@@ -40,7 +40,6 @@ namespace Building
                     }
                 }
             }
-            
         }
 
         public Vector3 GetNearestGridPosition(Vector3 position)

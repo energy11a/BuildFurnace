@@ -18,23 +18,34 @@ public class ParticleSpawner : MonoBehaviour
     
     public float simulationDuration = 7;
     private float nextStateSwitch;
-    public bool simulating = false;
     private readonly List<GameObject> spawnedParticles = new List<GameObject>();
 
     private void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
-    private void Start()
-    {
+    void OnEnable(){
         Events.Instance.OnSimulationStart += StartSimulation;
         Events.Instance.OnSimulationEnd += EndSimulation;
     }
 
+    void OnDisable(){
+        Events.Instance.OnSimulationStart -= StartSimulation;
+        Events.Instance.OnSimulationEnd -= EndSimulation;
+    }
+
     private void EndSimulation()
     {
-
+        Debug.Log("Simulation end");
+        Events.Instance.simulating = false;
         foreach (var obj in spawnedParticles)
         {
             if (obj)
@@ -49,7 +60,7 @@ public class ParticleSpawner : MonoBehaviour
     private void StartSimulation()
     {
         Debug.Log("Starting simulation");
-        simulating = true;
+        Events.Instance.simulating = true;
         nextStateSwitch = Time.time + simulationDuration;
         nextSpawnTime = Time.time;
     }
@@ -57,11 +68,10 @@ public class ParticleSpawner : MonoBehaviour
     void Update()
     {
         if (!particlePrefab) return;
-        if (!simulating) return;
+        if (!Events.Instance.simulating) return;
         if (Time.time > nextStateSwitch)
         {
             Events.Instance.RaiseSimulationEnd();
-            Debug.Log("Simulation end");
             return;
         }
 

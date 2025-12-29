@@ -21,15 +21,13 @@ public class Menu : MonoBehaviour
     // Settings nupp
     public void OpenSettings()
     {
-        if (settingsMenu != null)
-            settingsMenu.SetActive(true);
+        if (settingsMenu != null) settingsMenu.SetActive(true);
     }
 
     // Close Settings (vajadusel tagasinupu jaoks)
     public void CloseSettings()
     {
-        if (settingsMenu != null)
-            settingsMenu.SetActive(false);
+        if (settingsMenu != null) settingsMenu.SetActive(false);
     }
 
     // Quit nupp

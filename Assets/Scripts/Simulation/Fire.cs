@@ -12,13 +12,21 @@ namespace Simulation
 
         private void Awake()
         {
-            if (Instance == null) Instance = this;
-            else Destroy(gameObject);
+            if (Instance != null && Instance != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
+
+            Instance = this;
         }
 
-        private void Start()
-        {
+        void OnEnable(){
             Events.Instance.OnSimulationStart += OnStart;
+        }
+
+        void OnDisable(){
+            Events.Instance.OnSimulationStart -= OnStart;
         }
 
         private void OnStart()

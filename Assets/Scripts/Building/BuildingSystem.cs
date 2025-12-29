@@ -16,9 +16,15 @@ namespace Building
 
         private void Awake()
         {
-            if (Instance == null) Instance = this;
-            else throw new Exception("There can only be one instance of BuildingSystem2");
+            if (Instance != null && Instance != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
+
+            Instance = this;
         }
+
         private void OnDrawGizmos()
         {
             if (!visualiseGrid || !Application.isPlaying) return;

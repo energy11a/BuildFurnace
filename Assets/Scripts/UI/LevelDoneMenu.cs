@@ -9,8 +9,6 @@ public class LevelDoneMenu : MonoBehaviour
     [SerializeField] private Button restartButton;
 
     [Header("Next Level")]
-    [SerializeField]
-    private string nextLevelSceneName; // Inspectoris m��ratav level, mis avatakse Next Level nupuga
 
     [SerializeField] private AudioClip winSound;
     private AudioSource audioSource;
@@ -23,51 +21,28 @@ public class LevelDoneMenu : MonoBehaviour
 
     void Start()
     {
-        if (nextLevelButton != null)
-            nextLevelButton.onClick.AddListener(NextLevel);
+        if (Events.Instance.currentLevel < Events.Instance.levels.Count -1){
+            nextLevelButton.gameObject.SetActive(true);
+            if (nextLevelButton != null)
+                nextLevelButton.onClick.AddListener(() => Events.Instance.LoadLevel(Events.Instance.currentLevel + 1));
+        }
+        else{
+            nextLevelButton.gameObject.SetActive(false);
+        }
 
         if (mainMenuButton != null)
             mainMenuButton.onClick.AddListener(MainMenu);
 
         if (restartButton != null)
-            restartButton.onClick.AddListener(RestartLevel);
+            restartButton.onClick.AddListener(() => Events.Instance.LoadLevel(Events.Instance.currentLevel));
 
         if (Events.Instance != null)
             Events.Instance.LevelWon += PlayWinSound;
     }
 
-    private void NextLevel()
-    {
-        if (!string.IsNullOrEmpty(nextLevelSceneName))
-        {
-            SceneManager.sceneLoaded += ResetTimeScale;
-            SceneManager.LoadSceneAsync(nextLevelSceneName, LoadSceneMode.Single);
-            SceneManager.LoadSceneAsync("NeededInAll", LoadSceneMode.Additive);
-            SceneManager.LoadSceneAsync("UI", LoadSceneMode.Additive);
-        }
-    }
-
-    private void RestartLevel()
-    {
-        SceneManager.sceneLoaded += ResetTimeScale;
-        Scene currentScene = SceneManager.GetActiveScene();
-        SceneManager.LoadSceneAsync(currentScene.name, LoadSceneMode.Single);
-        SceneManager.LoadSceneAsync("NeededInAll", LoadSceneMode.Additive);
-        SceneManager.LoadSceneAsync("UI", LoadSceneMode.Additive);
-    }
-
     private void MainMenu()
     {
-        SceneManager.sceneLoaded += ResetTimeScale;
         SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
-    }
-
-    private void ResetTimeScale(Scene scene, LoadSceneMode mode)
-    {
-        Time.timeScale = 1f;
-        AudioListener.pause = false;
-        Debug.Log($"[DEBUG] Time.timeScale reset after loading {scene.name}");
-        SceneManager.sceneLoaded -= ResetTimeScale;
     }
 
     void OnDisable()

@@ -16,7 +16,6 @@ public class PauseMenu : MonoBehaviour
 
     void Start()
     {
-        Events.Instance.LevelWon += OnLevelEnd;
         // Pane pausimen�� alguses kinni
         if (pauseMenu != null)
             pauseMenu.SetActive(false);
@@ -32,7 +31,15 @@ public class PauseMenu : MonoBehaviour
             levelsButton.onClick.AddListener(OpenLevels);
     }
 
-   private void OnLevelEnd()
+    void OnEnable(){
+        Events.Instance.LevelWon += OnLevelEnd;
+    }
+
+    void OnDisable(){
+        Events.Instance.LevelWon -= OnLevelEnd;
+    }
+
+    private void OnLevelEnd()
     {
         Time.timeScale = 0f;
         levelWonPanel.SetActive(true);
@@ -87,13 +94,13 @@ public class PauseMenu : MonoBehaviour
     {
         Time.timeScale = 1f; // veendu, et m�ng ei j�� pausile
         AudioListener.pause = false;
-        SceneManager.LoadScene("MainMenu"); // pane siia oma men�� scene
+        SceneManager.LoadScene("MainMenu");
     }
 
     private void OpenLevels()
     {
         Time.timeScale = 1f;
         AudioListener.pause = false;
-        SceneManager.LoadScene("LevelSelect"); // pane siia oma level select scene
+        SceneManager.LoadScene("LevelSelect"); 
     }
 }

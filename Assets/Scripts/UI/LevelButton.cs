@@ -1,42 +1,25 @@
 
+using Data;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LevelButton : MonoBehaviour
 {
-    [SerializeField] private string levelSceneName;
-    [Header("Audio")]
-    [SerializeField] private AudioClip startLevelSound;
-    private AudioSource audioSource;
+    [SerializeField] private int level;
     private Button button;
+
+    public void Init(int i){
+        this.level = i;
+        GetComponentInChildren<TMP_Text>().text = Events.Instance.levels[i].name;
+    }
 
     void Awake()
     {
         button = GetComponent<Button>();
-        audioSource = GetComponent<AudioSource>();
 
         if (button != null)
-            button.onClick.AddListener(OpenLevel);
-    }
-
-    private void OpenLevel()
-    {
-        if (startLevelSound && audioSource)
-        {
-            audioSource.PlayOneShot(startLevelSound);
-            DontDestroyOnLoad(audioSource.gameObject);
-            StartCoroutine(DestroyAfterClip(startLevelSound.length));
-        }
-
-        SceneManager.LoadSceneAsync(levelSceneName, LoadSceneMode.Single);
-        SceneManager.LoadSceneAsync("NeededInAll", LoadSceneMode.Additive);
-        SceneManager.LoadSceneAsync("UI", LoadSceneMode.Additive);
-    }
-
-    private System.Collections.IEnumerator DestroyAfterClip(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        Destroy(audioSource.gameObject);
+            button.onClick.AddListener(() => Events.Instance.LoadLevel(level));
     }
 }

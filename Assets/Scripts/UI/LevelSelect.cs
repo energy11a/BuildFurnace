@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using Data;
+using System.Collections;
 
 public class LevelSelect : MonoBehaviour
 {
@@ -15,21 +17,22 @@ public class LevelSelect : MonoBehaviour
     [SerializeField] private Button prevButton;
     [SerializeField] private Button shopButton;
 
-    private List<Button> levelButtons = new List<Button>();
+    private List<GameObject> levelButtons = new List<GameObject>();
+    private Events events;
+    [SerializeField] private LevelButton levelButtonPrefab;
     private int currentPage = 0;
     private int totalPages = 0;
 
     void Start()
     {
-        // K�ik alamelemendid levelButtonsParent alt lisatakse automaatselt listi
-        foreach (Transform child in levelButtonsParent)
+        events = Events.Instance;
+        for (int i = 0; i < events.levels.Count; i++)
         {
-            Button btn = child.GetComponent<Button>();
-            if (btn != null)
-                levelButtons.Add(btn);
+            LevelButton button = Instantiate(levelButtonPrefab, levelButtonsParent);
+            button.Init(i);
+            levelButtons.Add(button.gameObject);
         }
-
-        totalPages = Mathf.CeilToInt((float)levelButtons.Count / levelsPerPage);
+        totalPages = Mathf.CeilToInt((float)events.levels.Count / levelsPerPage);
 
         // Nuppude listenerid
         backButton.onClick.AddListener(BackToMenu);
@@ -48,7 +51,7 @@ public class LevelSelect : MonoBehaviour
         // N�ita ainult praegusel lehel olevaid nuppe
         for (int i = 0; i < levelButtons.Count; i++)
         {
-            levelButtons[i].gameObject.SetActive(i >= startIndex && i < endIndex);
+            levelButtons[i].SetActive(i >= startIndex && i < endIndex);
         }
 
         // Noolte n�htavus

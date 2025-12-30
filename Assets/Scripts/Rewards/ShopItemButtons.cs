@@ -7,7 +7,7 @@ public class ShopItemButton : MonoBehaviour
 {
     [Header("Item")]
     [SerializeField] private string itemId = "ExtraBlock";
-    [SerializeField] private int cost = 50;
+    [SerializeField] private int cost;
 
     [Header("UI")]
     [SerializeField] private Button button;

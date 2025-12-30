@@ -2,27 +2,28 @@ using UnityEngine;
 
 public class LevelRewarder : MonoBehaviour
 {
-    public CurrentLevelPanel levelPanel;
+    private Events events;
 
     private void OnEnable()
     {
-        if (Events.Instance != null)
-            Events.Instance.LevelWon += OnLevelWon;
+        events = Events.Instance;
+        if (events != null)
+            events.LevelWon += OnLevelWon;
     }
     private void OnDisable()
     {
         if (Events.Instance != null)
-            Events.Instance.LevelWon -= OnLevelWon;
+            events.LevelWon -= OnLevelWon;
     }
     private void OnLevelWon()
     {
-        if (levelPanel == null)
+        if (events == null)
         {
-            Debug.LogWarning("[LevelRewarder] No CurrentLevelPanel assigned; reward is 0.");
+            Debug.LogWarning("[LevelRewarder] Events instance is null");
             return;
         }
 
-        int reward = Mathf.Max(0, Events.Instance.level.reward);
+        int reward = Mathf.Max(0, events.level.reward);
         if (Wallet.Instance != null)
         {
             Wallet.Instance.Add(reward);

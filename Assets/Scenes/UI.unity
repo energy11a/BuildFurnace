@@ -1136,7 +1136,6 @@ MonoBehaviour:
   nextLevelButton: {fileID: 2003257795}
   mainMenuButton: {fileID: 937769752}
   restartButton: {fileID: 1069036465}
-  winSound: {fileID: 8300000, guid: 3c9807d38863c8345976a7fcdaf08f11, type: 3}
 --- !u!114 &604195995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1222,7 +1221,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: 3c9807d38863c8345976a7fcdaf08f11, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

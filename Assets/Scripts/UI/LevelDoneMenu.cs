@@ -10,13 +10,12 @@ public class LevelDoneMenu : MonoBehaviour
 
     [Header("Next Level")]
 
-    [SerializeField] private AudioClip winSound;
-    private AudioSource audioSource;
+    private AudioSource winSound;
     private bool winSoundPlayed = false;
 
     void Awake()
     {
-        audioSource = GetComponent<AudioSource>();
+        winSound = GetComponent<AudioSource>();
     }
 
     void Start()
@@ -47,19 +46,18 @@ public class LevelDoneMenu : MonoBehaviour
 
     void OnDisable()
     {
-        if (Events.Instance != null)
-            Events.Instance.LevelWon -= PlayWinSound;
+        Events.Instance.LevelWon -= PlayWinSound;
     }
     private void PlayWinSound()
     {
         if (winSoundPlayed) return;
         winSoundPlayed = true;
 
-        if (winSound != null && audioSource != null)
+        if (winSound != null)
         {
-            audioSource.loop = false;
-            audioSource.ignoreListenerPause = true; // play even if AudioListener.pause is true
-            audioSource.PlayOneShot(winSound);
+            winSound.loop = false;
+            winSound.ignoreListenerPause = true; // play even if AudioListener.pause is true
+            winSound.Play();
         }
     }
 }

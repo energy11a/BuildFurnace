@@ -17,15 +17,21 @@ public class LevelSelect : MonoBehaviour
     [SerializeField] private Button prevButton;
     [SerializeField] private Button shopButton;
 
+    [Header("LevelButton Prefab")]
+    [SerializeField] private LevelButton levelButtonPrefab;
+
+    [Header("Level Data")]
+    [SerializeField] private List<LevelData> levelslist;
+
     private List<GameObject> levelButtons = new List<GameObject>();
     private Events events;
-    [SerializeField] private LevelButton levelButtonPrefab;
     private int currentPage = 0;
     private int totalPages = 0;
 
     void Start()
     {
         events = Events.Instance;
+        events.levels = levelslist;
         for (int i = 0; i < events.levels.Count; i++)
         {
             LevelButton button = Instantiate(levelButtonPrefab, levelButtonsParent);

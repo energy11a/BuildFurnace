@@ -1,3 +1,5 @@
+using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -7,6 +9,7 @@ public class LevelDoneMenu : MonoBehaviour
     [Header("Buttons")][SerializeField] private Button nextLevelButton;
     [SerializeField] private Button mainMenuButton;
     [SerializeField] private Button restartButton;
+    [SerializeField] private TMP_Text rewardText;
 
     [Header("Next Level")]
 
@@ -20,10 +23,10 @@ public class LevelDoneMenu : MonoBehaviour
 
     void Start()
     {
-        if (Events.Instance.currentLevel < Events.Instance.levels.Count -1){
+        if (GameManager.Instance.currentLevel < GameManager.Instance.levels.Count -1){
             nextLevelButton.gameObject.SetActive(true);
             if (nextLevelButton != null)
-                nextLevelButton.onClick.AddListener(() => Events.Instance.LoadLevel(Events.Instance.currentLevel + 1));
+                nextLevelButton.onClick.AddListener(() => GameManager.Instance.LoadLevel(GameManager.Instance.currentLevel + 1));
         }
         else{
             nextLevelButton.gameObject.SetActive(false);
@@ -33,10 +36,10 @@ public class LevelDoneMenu : MonoBehaviour
             mainMenuButton.onClick.AddListener(MainMenu);
 
         if (restartButton != null)
-            restartButton.onClick.AddListener(() => Events.Instance.LoadLevel(Events.Instance.currentLevel));
+            restartButton.onClick.AddListener(() => GameManager.Instance.LoadLevel(GameManager.Instance.currentLevel));
 
-        if (Events.Instance != null)
-            Events.Instance.LevelWon += PlayWinSound;
+        if (GameManager.Instance != null)
+            GameManager.Instance.LevelWon += PlayWinSound;
     }
 
     private void MainMenu()
@@ -44,9 +47,14 @@ public class LevelDoneMenu : MonoBehaviour
         SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
     }
 
+    private void OnEnable()
+    {
+        rewardText.text = "Reward: " + GameManager.Instance.level.reward;
+    }
+
     void OnDisable()
     {
-        Events.Instance.LevelWon -= PlayWinSound;
+        GameManager.Instance.LevelWon -= PlayWinSound;
     }
     private void PlayWinSound()
     {

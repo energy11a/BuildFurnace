@@ -29,7 +29,7 @@ namespace Automation
             freePos = new Vector3(-distanceAlongX, -distanceAlongX, distanceAlongZ);
             gridStartPos = GetNearestGridPosition(transform.position);
 
-            SpawnBlocks(Events.Instance.level.buildingBlocks);
+            SpawnBlocks(GameManager.Instance.level.buildingBlocks);
         }
 
         private void OnDrawGizmos()
@@ -54,6 +54,7 @@ namespace Automation
             GameObject spawned = Instantiate(blockPrefab, pos, Quaternion.identity );
 
             spawned.GetComponent<MeshFilter>().mesh = block.mesh;
+            spawned.GetComponent<MeshCollider>().sharedMesh = block.mesh;
             spawned.GetComponent<Renderer>().material = block.material;
 
             if (freePos.x + cellSize >= distanceAlongX){

@@ -2,28 +2,31 @@ using UnityEngine;
 
 public class LevelRewarder : MonoBehaviour
 {
-    private Events events;
+    private GameManager _gameManager;
 
     private void OnEnable()
     {
-        events = Events.Instance;
-        if (events != null)
-            events.LevelWon += OnLevelWon;
+        _gameManager = GameManager.Instance;
+        if (_gameManager != null)
+            _gameManager.LevelWon += OnLevelWon;
     }
     private void OnDisable()
     {
-        if (Events.Instance != null)
-            events.LevelWon -= OnLevelWon;
+        if (GameManager.Instance != null)
+            _gameManager.LevelWon -= OnLevelWon;
     }
     private void OnLevelWon()
     {
-        if (events == null)
+        if (_gameManager == null)
         {
-            Debug.LogWarning("[LevelRewarder] Events instance is null");
+            Debug.LogWarning("[LevelRewarder] GameManager instance is null");
             return;
         }
 
-        int reward = Mathf.Max(0, events.level.reward);
+        if (_gameManager.level.completed) return;
+        _gameManager.level.completed = true;
+
+        int reward = Mathf.Max(0, _gameManager.level.reward);
         if (Wallet.Instance != null)
         {
             Wallet.Instance.Add(reward);

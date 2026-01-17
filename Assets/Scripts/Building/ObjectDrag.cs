@@ -3,7 +3,6 @@ using UnityEngine;
 
 namespace Building
 {
-    [RequireComponent(typeof(Collider))]
     public class ObjectDrag : MonoBehaviour
     {
         public float speed = 1;
@@ -34,7 +33,7 @@ namespace Building
 
         void OnMouseDown()
         {
-            if (Events.Instance.simulating) return;
+            if (GameManager.Instance.simulating) return;
             if (outline) outline.enabled = true;
             rb.rotation = Quaternion.identity;
             rb.constraints = RigidbodyConstraints.FreezeAll;
@@ -51,7 +50,7 @@ namespace Building
 
         void OnMouseDrag()
         {
-            if (Events.Instance.simulating) return;
+            if (GameManager.Instance.simulating) return;
             if (cam == null)
             {
                 cam = Camera.main;
@@ -78,7 +77,7 @@ namespace Building
 
         void OnMouseUp()
         {
-            if (Events.Instance.simulating) return;
+            if (GameManager.Instance.simulating) return;
             transform.position = targetPos;
             rb.constraints = RigidbodyConstraints.FreezeAll;
             if (outline) outline.enabled = false;
@@ -100,7 +99,7 @@ namespace Building
         }
         void Update()
         {
-            if (Events.Instance.simulating) return;
+            if (GameManager.Instance.simulating) return;
 
             // R key rotates object 90 degrees clockwise around Y
             if (Input.GetKeyDown(KeyCode.R) && outline.enabled)

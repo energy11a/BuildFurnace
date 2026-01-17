@@ -11,14 +11,14 @@ public class CoinCounterUI : MonoBehaviour
             coinText.text = Wallet.Instance ? Wallet.Instance.Coins.ToString() : "0";
             coinText.text = "Coins: " + coinText.text;
 
-        if (Events.Instance != null)
-            Events.Instance.OnCoinsChanged += OnCoinsChanged;
+        if (GameManager.Instance != null)
+            GameManager.Instance.OnCoinsChanged += OnCoinsChanged;
     }
 
     private void OnDisable()
     {
-        if (Events.Instance != null)
-            Events.Instance.OnCoinsChanged -= OnCoinsChanged;
+        if (GameManager.Instance != null)
+            GameManager.Instance.OnCoinsChanged -= OnCoinsChanged;
     }
 
     private void OnCoinsChanged(int total)

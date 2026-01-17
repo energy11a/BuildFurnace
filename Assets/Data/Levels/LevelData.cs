@@ -10,7 +10,7 @@ namespace Data
         public string SceneName;
         public string LevelName;
         public float winTemperature;
-        public bool IsRaining;
+        public bool completed;
         public Vector3 FurnacePos;
         public int reward;
     }

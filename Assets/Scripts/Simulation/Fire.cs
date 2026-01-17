@@ -22,11 +22,11 @@ namespace Simulation
         }
 
         void OnEnable(){
-            Events.Instance.OnSimulationStart += OnStart;
+            GameManager.Instance.OnSimulationStart += OnStart;
         }
 
         void OnDisable(){
-            Events.Instance.OnSimulationStart -= OnStart;
+            GameManager.Instance.OnSimulationStart -= OnStart;
         }
 
         private void OnStart()
@@ -61,14 +61,14 @@ namespace Simulation
 
         private void Update()
         {
-            if (!Events.Instance.simulating) return;
+            if (!GameManager.Instance.simulating) return;
 
             float temperature = CalculateTemperature();
-            Events.Instance.RaiseTempChange(temperature);
+            GameManager.Instance.RaiseTempChange(temperature);
 
             if (oxygenConcentration <= 0f)
             {
-                Events.Instance.RaiseSimulationEnd();
+                GameManager.Instance.RaiseSimulationEnd();
                 return;
             }
 
@@ -83,7 +83,7 @@ namespace Simulation
                 heatParticle.temperature = 2 * oxygenConcentration;
             }
 
-            Events.Instance.RaiseOxygenLevelChanged((oxygenConcentration / maxOxygen) * 100);
+            GameManager.Instance.RaiseOxygenLevelChanged((oxygenConcentration / maxOxygen) * 100);
         }
 
         private float CalculateTemperature()

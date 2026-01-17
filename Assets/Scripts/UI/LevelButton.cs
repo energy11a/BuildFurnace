@@ -12,7 +12,7 @@ public class LevelButton : MonoBehaviour
 
     public void Init(int i){
         this.level = i;
-        GetComponentInChildren<TMP_Text>().text = Events.Instance.levels[i].name;
+        GetComponentInChildren<TMP_Text>().text = GameManager.Instance.levels[i].name;
     }
 
     void Awake()
@@ -20,6 +20,6 @@ public class LevelButton : MonoBehaviour
         button = GetComponent<Button>();
 
         if (button != null)
-            button.onClick.AddListener(() => Events.Instance.LoadLevel(level));
+            button.onClick.AddListener(() => GameManager.Instance.LoadLevel(level));
     }
 }

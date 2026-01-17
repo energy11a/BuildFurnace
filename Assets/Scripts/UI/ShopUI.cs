@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -8,23 +9,32 @@ public class ShopUI : MonoBehaviour
     [SerializeField] private TMP_Text coinText;
     [SerializeField] private string levelSelectSceneName = "LevelSelect";
 
-    private ShopItemButton[] itemButtons;
+    private List<ShopItemButton> itemButtons = new List<ShopItemButton>();
+    [SerializeField] private ShopItemButton _itemButtonPrefab;
 
     private void Awake()
     {
         if (Wallet.Instance == null)
             Debug.LogError("[ShopUI] Wallet.Instance is NULL. Ensure NeededInAll (or Bootstrap) has created Wallet and it persists.");
         //if (Events.Instance == null)
-            //Debug.LogError("[ShopUI] Events.Instance is NULL. Ensure NeededInAll has Events and it persists.");
+        //Debug.LogError("[ShopUI] Events.Instance is NULL. Ensure NeededInAll has Events and it persists.");
     }
     private void Start()
     {
-        itemButtons = GetComponentsInChildren<ShopItemButton>(true);
+        
+        Debug.Log("[ShopUI] Avaiable blocks:"  + GameManager.Instance.allBlocks.Count);
+        foreach (BlockData data in GameManager.Instance.allBlocks)
+        {
+            Debug.Log("[ShopUI] Instantiating " + data.alias);
+            ShopItemButton button = Instantiate(_itemButtonPrefab, transform);
+            button.Init(data);
+            itemButtons.Add(button);
+        }
 
         RefreshCoinText();
 
-        if (Events.Instance != null)
-            Events.Instance.OnCoinsChanged += OnCoinsChanged;
+        if (GameManager.Instance != null)
+            GameManager.Instance.OnCoinsChanged += OnCoinsChanged;
 
         foreach (var btn in itemButtons)
         {
@@ -34,8 +44,8 @@ public class ShopUI : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (Events.Instance != null)
-            Events.Instance.OnCoinsChanged -= OnCoinsChanged;
+        if (GameManager.Instance != null)
+            GameManager.Instance.OnCoinsChanged -= OnCoinsChanged;
     }
 
     private void OnCoinsChanged(int total)
@@ -63,22 +73,23 @@ public class ShopUI : MonoBehaviour
             return;
         }
 
-        if (TempInventory.HasItem(item.ItemId))
+        if (item.block.bought)
         {
-            Debug.Log($"[ShopUI] Item '{item.ItemId}' already purchased for next level.");
+            Debug.Log($"[ShopUI] Item '{item.block.alias}' already purchased for next level.");
             item.SetPurchasedVisual(true);
             return;
         }
 
-        bool ok = Wallet.Instance.Spend(item.Cost);
+        bool ok = Wallet.Instance.Spend(item.block.cost);
         if (!ok)
         {
-            Debug.Log($"[ShopUI] Not enough coins to buy '{item.ItemId}'. Need {item.Cost}, have {Wallet.Instance.Coins}.");
+            Debug.Log($"[ShopUI] Not enough coins to buy '{item.block.alias}'. Need {item.block.cost}, have {Wallet.Instance.Coins}.");
             item.PulseNotEnough();
             return;
         }
-        TempInventory.AddItem(item.ItemId);
-        Debug.Log($"[ShopUI] Bought '{item.ItemId}' for {item.Cost}. Coins now {Wallet.Instance.Coins}.");
+
+        item.block.bought = true;
+        Debug.Log($"[ShopUI] Bought '{item.block.alias}' for {item.block.cost}. Coins now {Wallet.Instance.Coins}.");
 
         item.SetPurchasedVisual(true);
         foreach (var btn in itemButtons)

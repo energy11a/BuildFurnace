@@ -16,7 +16,7 @@ public class CurrentLevelPanel : MonoBehaviour
         if (tempText) extraTmp = tempText.GetComponent<TMP_Text>();
     }
     void Start(){
-        LevelData level = Events.Instance.level;
+        LevelData level = GameManager.Instance.level;
         levelText.text = level.LevelName;
         OnTempChange(0);
         OnOxygenChange(0);
@@ -28,18 +28,18 @@ public class CurrentLevelPanel : MonoBehaviour
     }
     void OnEnable()
     {
-        Events.Instance.OnTempChange += OnTempChange;
-        Events.Instance.OnOxygenChange += OnOxygenChange;
+        GameManager.Instance.OnTempChange += OnTempChange;
+        GameManager.Instance.OnOxygenChange += OnOxygenChange;
     }
 
     void OnDisable()
     {
-        Events.Instance.OnTempChange -= OnTempChange;
-        Events.Instance.OnOxygenChange -= OnOxygenChange;
+        GameManager.Instance.OnTempChange -= OnTempChange;
+        GameManager.Instance.OnOxygenChange -= OnOxygenChange;
     }
 
     void OnTempChange(float t)
     {
-        if (extraTmp) extraTmp.text = $"{t:F0} / {Events.Instance.level.winTemperature} °C";
+        if (extraTmp) extraTmp.text = $"{t:F0} / {GameManager.Instance.level.winTemperature} °C";
     }
 }

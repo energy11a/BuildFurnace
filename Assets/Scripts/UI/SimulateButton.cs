@@ -16,8 +16,8 @@ public class SimulateButton : MonoBehaviour
         text = GetComponentInChildren<TMP_Text>();
         GetComponent<Button>().onClick.AddListener(OnButtonClick);
         
-        Events.Instance.OnSimulationEnd += InstanceOnonSimulationEnd;
-        Events.Instance.OnSimulationStart += InstanceOnOnSimulationStart;
+        GameManager.Instance.OnSimulationEnd += InstanceOnonSimulationEnd;
+        GameManager.Instance.OnSimulationStart += InstanceOnOnSimulationStart;
 
         simulateHotkey = InputSystem.actions.FindAction("Toggle_simulation");
         
@@ -52,9 +52,9 @@ public class SimulateButton : MonoBehaviour
     private void OnButtonClick()
     {
         if  (!simulating)
-            Events.Instance.RaiseSimulationStart();
+            GameManager.Instance.RaiseSimulationStart();
         else
-            Events.Instance.RaiseSimulationEnd();
+            GameManager.Instance.RaiseSimulationEnd();
     }
 
 

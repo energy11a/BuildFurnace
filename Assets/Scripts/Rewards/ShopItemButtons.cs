@@ -1,14 +1,11 @@
 
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ShopItemButton : MonoBehaviour
 {
-    [Header("Item")]
-    [SerializeField] private string itemId = "ExtraBlock";
-    [SerializeField] private int cost;
-
     [Header("UI")]
     [SerializeField] private Button button;
     [SerializeField] private TMP_Text titleText;
@@ -17,8 +14,7 @@ public class ShopItemButton : MonoBehaviour
 
     private ShopUI shop;
 
-    public string ItemId => itemId;
-    public int Cost => cost;
+    public BlockData block;
 
     private void Reset()
     {
@@ -34,8 +30,9 @@ public class ShopItemButton : MonoBehaviour
             Debug.LogError($"[ShopItemButton] No ShopUI found in parent for '{name}'.");
     }
 
-    private void OnEnable()
+    public void Init(BlockData data)
     {
+        block = data;
         if (button != null)
         {
             button.onClick.RemoveAllListeners();
@@ -43,12 +40,14 @@ public class ShopItemButton : MonoBehaviour
         }
 
         if (costText != null)
-            costText.text = cost.ToString();
-
+            costText.text = block.cost.ToString();
+        
+        titleText.text = block.alias;
+        
         if (purchasedBadge != null)
-            purchasedBadge.SetActive(TempInventory.HasItem(itemId));
+            purchasedBadge.SetActive(block.bought);
 
-        SetPurchasedVisual(TempInventory.HasItem(itemId));
+        SetPurchasedVisual(block.bought);
     }
 
     private void OnClick()
@@ -59,11 +58,11 @@ public class ShopItemButton : MonoBehaviour
 
     public void RefreshAffordableState(int currentCoins)
     {
-        bool affordable = currentCoins >= cost;
+        bool affordable = currentCoins >= block.cost;
         if (button != null)
             button.interactable = true;
         if (costText != null)
-            costText.color = affordable ? Color.white : new Color(1f, 0.5f, 0.5f);
+            costText.color = affordable ? Color.green : Color.red;
     }
 
     public void SetPurchasedVisual(bool purchased)
@@ -74,6 +73,6 @@ public class ShopItemButton : MonoBehaviour
 
     public void PulseNotEnough()
     {
-        Debug.Log($"[ShopItemButton] Not enough coins for '{itemId}'. Cost {cost}.");
+        Debug.Log($"[ShopItemButton] Not enough coins for '{block.alias}'. Cost {block.cost}.");
     }
 }

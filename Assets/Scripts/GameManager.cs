@@ -6,20 +6,21 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Events : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
-    [HideInInspector]public static Events Instance;
-    [HideInInspector]public event Action OnSimulationStart;
-    [HideInInspector]public event Action OnSimulationEnd;
-    [HideInInspector]public bool simulating;
-    [HideInInspector]public event Action<float> OnOxygenChange;
-    [HideInInspector]public event Action<float> OnTempChange;
-    [HideInInspector]public event Action LevelWon;
-    [HideInInspector]public event Action<int> OnCoinsChanged;
+    [HideInInspector] public static GameManager Instance;
+    [HideInInspector] public event Action OnSimulationStart;
+    [HideInInspector] public event Action OnSimulationEnd;
+    [HideInInspector] public bool simulating;
+    [HideInInspector] public event Action<float> OnOxygenChange;
+    [HideInInspector] public event Action<float> OnTempChange;
+    [HideInInspector] public event Action LevelWon;
+    [HideInInspector] public event Action<int> OnCoinsChanged;
 
+    public List<BlockData> allBlocks;
     public List<LevelData> levels;
-    public LevelData level;
-    [HideInInspector]public int currentLevel;
+    [HideInInspector] public LevelData level;
+    [HideInInspector] public int currentLevel;
 
     //Audio
     [SerializeField] private AudioClip startLevelSound;
@@ -56,6 +57,7 @@ public class Events : MonoBehaviour
         {
             RaiseLevelWon();
         }
+
         OnTempChange?.Invoke(t);
     }
 
@@ -76,7 +78,7 @@ public class Events : MonoBehaviour
     {
         currentLevel = index;
         level = levels[currentLevel];
-        
+
         if (startLevelSound) audioSource.PlayOneShot(startLevelSound);
 
         Time.timeScale = 1f;

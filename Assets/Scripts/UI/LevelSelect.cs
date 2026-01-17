@@ -20,25 +20,21 @@ public class LevelSelect : MonoBehaviour
     [Header("LevelButton Prefab")]
     [SerializeField] private LevelButton levelButtonPrefab;
 
-    [Header("Level Data")]
-    [SerializeField] private List<LevelData> levelslist;
-
     private List<GameObject> levelButtons = new List<GameObject>();
-    private Events events;
+    private GameManager _gameManager;
     private int currentPage = 0;
     private int totalPages = 0;
 
     void Start()
     {
-        events = Events.Instance;
-        events.levels = levelslist;
-        for (int i = 0; i < events.levels.Count; i++)
+        _gameManager = GameManager.Instance;
+        for (int i = 0; i < _gameManager.levels.Count; i++)
         {
             LevelButton button = Instantiate(levelButtonPrefab, levelButtonsParent);
             button.Init(i);
             levelButtons.Add(button.gameObject);
         }
-        totalPages = Mathf.CeilToInt((float)events.levels.Count / levelsPerPage);
+        totalPages = Mathf.CeilToInt((float)_gameManager.levels.Count / levelsPerPage);
 
         // Nuppude listenerid
         backButton.onClick.AddListener(BackToMenu);
@@ -85,7 +81,7 @@ public class LevelSelect : MonoBehaviour
 
     public void BackToMenu()
     {
-        SceneManager.LoadScene("MainMenu"); // Pane oma avamen?? scene nimi
+        SceneManager.LoadScene("MainMenu");
     }
     public void OpenShop()
     {

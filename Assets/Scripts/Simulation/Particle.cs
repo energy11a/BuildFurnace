@@ -14,17 +14,17 @@ public class Particle : MonoBehaviour
         origin = transform.position;
         rb = GetComponent<Rigidbody>();
         rend = GetComponent<Renderer>();
-        if (Events.Instance) Events.Instance.OnSimulationEnd += OnSimEnd;
+        if (GameManager.Instance) GameManager.Instance.OnSimulationEnd += OnSimEnd;
     }
 
     void OnDisable()
     {
-        if (Events.Instance) Events.Instance.OnSimulationEnd -= OnSimEnd;
+        if (GameManager.Instance) GameManager.Instance.OnSimulationEnd -= OnSimEnd;
     }
 
     void OnDestroy()
     {
-        if (Events.Instance) Events.Instance.OnSimulationEnd -= OnSimEnd;
+        if (GameManager.Instance) GameManager.Instance.OnSimulationEnd -= OnSimEnd;
     }
 
     void OnSimEnd()

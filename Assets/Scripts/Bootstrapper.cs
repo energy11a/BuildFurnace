@@ -8,10 +8,10 @@ public class Bootstrapper : MonoBehaviour
   private void Awake()
   {
     Application.targetFrameRate = 144;
-    if (Events.Instance == null)
+    if (GameManager.Instance == null)
     {
       var eventsGO = new GameObject("Events");
-      eventsGO.AddComponent<Events>();
+      eventsGO.AddComponent<GameManager>();
     }
 
     if (Wallet.Instance == null)

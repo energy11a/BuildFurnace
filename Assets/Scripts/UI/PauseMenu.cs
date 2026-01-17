@@ -32,11 +32,11 @@ public class PauseMenu : MonoBehaviour
     }
 
     void OnEnable(){
-        Events.Instance.LevelWon += OnLevelEnd;
+        GameManager.Instance.LevelWon += OnLevelEnd;
     }
 
     void OnDisable(){
-        Events.Instance.LevelWon -= OnLevelEnd;
+        GameManager.Instance.LevelWon -= OnLevelEnd;
     }
 
     private void OnLevelEnd()

@@ -26,17 +26,17 @@ namespace Simulation
         void OnEnable()
         {
             rb = GetComponent<Rigidbody>();
-            if (Events.Instance) Events.Instance.OnSimulationEnd += OnSimEnd;
+            if (GameManager.Instance) GameManager.Instance.OnSimulationEnd += OnSimEnd;
         }
 
         void OnDisable()
         {
-            if (Events.Instance) Events.Instance.OnSimulationEnd -= OnSimEnd;
+            if (GameManager.Instance) GameManager.Instance.OnSimulationEnd -= OnSimEnd;
         }
 
         void OnDestroy()
         {
-            if (Events.Instance) Events.Instance.OnSimulationEnd -= OnSimEnd;
+            if (GameManager.Instance) GameManager.Instance.OnSimulationEnd -= OnSimEnd;
         }
 
         void OnSimEnd()

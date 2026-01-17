@@ -1136,6 +1136,7 @@ MonoBehaviour:
   nextLevelButton: {fileID: 2003257795}
   mainMenuButton: {fileID: 937769752}
   restartButton: {fileID: 1069036465}
+  rewardText: {fileID: 1611002488}
 --- !u!114 &604195995
 MonoBehaviour:
   m_ObjectHideFlags: 0

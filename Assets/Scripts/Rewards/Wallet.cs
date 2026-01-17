@@ -13,7 +13,7 @@ public class Wallet : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
         Coins = PlayerPrefs.GetInt(CoinsKey, 0);
-        Events.Instance?.RaiseCoinsChanged(Coins);
+        GameManager.Instance?.RaiseCoinsChanged(Coins);
     }
 
     public void Add(int amount)
@@ -21,7 +21,7 @@ public class Wallet : MonoBehaviour
         if (amount <= 0) return;
         Coins += amount;
         Save();
-        Events.Instance?.RaiseCoinsChanged(Coins);
+        GameManager.Instance?.RaiseCoinsChanged(Coins);
     }
 
     public bool Spend(int amount)
@@ -31,7 +31,7 @@ public class Wallet : MonoBehaviour
 
         Coins -= amount;
         Save();
-        Events.Instance?.RaiseCoinsChanged(Coins);
+        GameManager.Instance?.RaiseCoinsChanged(Coins);
         return true;
     }
 
@@ -39,7 +39,7 @@ public class Wallet : MonoBehaviour
     {
         Coins = 0;
         Save();
-        Events.Instance?.RaiseCoinsChanged(Coins);
+        GameManager.Instance?.RaiseCoinsChanged(Coins);
     }
 
     private void Save()

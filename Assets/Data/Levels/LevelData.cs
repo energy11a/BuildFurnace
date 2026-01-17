@@ -13,6 +13,8 @@ namespace Data
         public bool completed;
         public Vector3 FurnacePos;
         public int reward;
+
+        public bool hasRain = false;
     }
 }
 [System.Serializable]

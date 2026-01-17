@@ -83,6 +83,7 @@ public class GameManager : MonoBehaviour
 
         Time.timeScale = 1f;
         AudioListener.pause = false;
+        Debug.Log(level.SceneName);
         SceneManager.LoadSceneAsync(level.SceneName, LoadSceneMode.Single);
         SceneManager.LoadSceneAsync("NeededInAll", LoadSceneMode.Additive);
         SceneManager.LoadSceneAsync("UI", LoadSceneMode.Additive);

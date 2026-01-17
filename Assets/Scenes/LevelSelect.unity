@@ -683,7 +683,7 @@ MonoBehaviour:
   m_CellSize: {x: 100, y: 100}
   m_Spacing: {x: 20, y: 2}
   m_Constraint: 1
-  m_ConstraintCount: 3
+  m_ConstraintCount: 4
 --- !u!1001 &126695743
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6198,9 +6198,6 @@ MonoBehaviour:
   prevButton: {fileID: 2005840583}
   shopButton: {fileID: 1589126677}
   levelButtonPrefab: {fileID: 7187020226393297998, guid: 73f83a3135eb336f8b285fb8f771a47f, type: 3}
-  levelslist:
-  - {fileID: 11400000, guid: 678d993a343e59c219ba5a21a4d69a83, type: 2}
-  - {fileID: 11400000, guid: 326abc806c043d861ae9699f4f082e88, type: 2}
 --- !u!222 &1425369060
 CanvasRenderer:
   m_ObjectHideFlags: 0

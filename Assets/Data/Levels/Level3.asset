@@ -19,8 +19,8 @@ MonoBehaviour:
     count: 6
   SceneName: Level3
   LevelName: Level 3
-  winTemperature: 120
-  completed: 0
+  winTemperature: 150
+  completed: 1
   FurnacePos: {x: 0, y: 0, z: 0}
   reward: 15
   hasRain: 1

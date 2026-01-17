@@ -14,7 +14,6 @@ namespace Data
         public Vector3 FurnacePos;
         public int reward;
 
-        public bool hasRain = false;
     }
 }
 [System.Serializable]

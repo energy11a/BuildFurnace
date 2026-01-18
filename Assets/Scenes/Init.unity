@@ -294,6 +294,14 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 915463f3f0532904b8515cdfb529471f, type: 2}
   - {fileID: 11400000, guid: 4d0d50cb6662f1f4696ef0383678e882, type: 2}
   - {fileID: 11400000, guid: 0a91d91bbd9dc3f449be1e8bec81509b, type: 2}
+  - {fileID: 11400000, guid: 82ce98054aa7f6443afe25f9ac23787f, type: 2}
+  - {fileID: 11400000, guid: e6ce841365160c540960b086acd11450, type: 2}
+  - {fileID: 11400000, guid: 24de69e605ebb7f48894d076d2499716, type: 2}
+  - {fileID: 11400000, guid: 7c69e95172900c24fb3a3201424b867b, type: 2}
+  - {fileID: 11400000, guid: af91d74ed794e764e85375a0340e3335, type: 2}
+  - {fileID: 11400000, guid: 177f1c01f0f25e346afdd0af4b7fb9d6, type: 2}
+  - {fileID: 11400000, guid: 2c61751abc74dd24d8ca50042c20feac, type: 2}
+  - {fileID: 11400000, guid: a816c73a3440a6641b46caf996a4f603, type: 2}
   level: {fileID: 0}
   currentLevel: 0
   startLevelSound: {fileID: 8300000, guid: 898d88c077b22034cab3743edce98633, type: 3}

@@ -17,4 +17,4 @@ MonoBehaviour:
   material: {fileID: 2100000, guid: 5dc91afaccd4cd3a1b441d8dc884978d, type: 2}
   size: {x: 1, y: 1, z: 1}
   cost: 5
-  bought: 1
+  bought: 0

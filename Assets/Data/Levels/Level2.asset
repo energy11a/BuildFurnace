@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Data.LevelData
   buildingBlocks:
   - BlockData: {fileID: 11400000, guid: f576ca5fe26e58e97b44ad1bf2b1de86, type: 2}
-    count: 6
+    count: 4
   SceneName: Level2
   LevelName: Level 2
   winTemperature: 120

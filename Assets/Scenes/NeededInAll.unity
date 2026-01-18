@@ -1013,7 +1013,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1189244101}
-  - component: {fileID: 1189244100}
   m_Layer: 0
   m_Name: LevelItemManager
   m_TagString: Untagged
@@ -1021,20 +1020,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1189244100
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1189244099}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5f2c77ace4a202469566e8daa4d9ffd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  extraBlockPrefab: {fileID: 7969576972883089186, guid: 999cd4b5bbb980578b83f2e3a4f4365d, type: 3}
-  extraBlockSpawnPoint: {fileID: 0}
 --- !u!4 &1189244101
 Transform:
   m_ObjectHideFlags: 0

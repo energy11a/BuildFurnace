@@ -854,7 +854,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 913e7e0c5020f664484a87374cbdf7cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AudioSystem
-  songs: []
+  player: {fileID: 683746548}
+  musics:
+  - {fileID: 8300000, guid: 898d88c077b22034cab3743edce98633, type: 3}
+  - {fileID: 8300000, guid: 3c9807d38863c8345976a7fcdaf08f11, type: 3}
 --- !u!82 &683746548
 AudioSource:
   m_ObjectHideFlags: 0
@@ -864,7 +867,7 @@ AudioSource:
   m_GameObject: {fileID: 683746545}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 749006554920588100, guid: 82b4744c6c49e4d40b04abf83c279c50, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0

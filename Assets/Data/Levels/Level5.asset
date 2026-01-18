@@ -24,6 +24,6 @@ MonoBehaviour:
   SceneName: Level4
   LevelName: Level 5
   winTemperature: 200
-  completed: 1
+  completed: 0
   FurnacePos: {x: 0, y: 0, z: 0}
   reward: 20

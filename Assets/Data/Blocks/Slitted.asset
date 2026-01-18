@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae6baacbec3a336e6b0be3271c09e51f, type: 3}
   m_Name: Slitted
   m_EditorClassIdentifier: Assembly-CSharp::BlockData
-  mesh: {fileID: 0}
-  material: {fileID: 0}
+  alias: Slitted
+  mesh: {fileID: -2432090755550338912, guid: 44f61a251f95dde4d98f8965a5085ae6, type: 3}
+  material: {fileID: -3033667219593020291, guid: 44f61a251f95dde4d98f8965a5085ae6, type: 3}
   size: {x: 1, y: 1, z: 1}
-  cost: 0
-  bought: 0
+  cost: 10
+  bought: 1

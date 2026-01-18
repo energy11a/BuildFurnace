@@ -282,11 +282,16 @@ MonoBehaviour:
   allBlocks:
   - {fileID: 11400000, guid: bd50abd26ebd71be79a44ebbbca542f8, type: 2}
   - {fileID: 11400000, guid: f576ca5fe26e58e97b44ad1bf2b1de86, type: 2}
+  - {fileID: 11400000, guid: 4235f5f48a60311469cb347859825528, type: 2}
+  - {fileID: 11400000, guid: 136f230eab78bb84d998df6d60c8072d, type: 2}
+  - {fileID: 11400000, guid: 2ac49050337de8a478c5bc229e3dee3e, type: 2}
   levels:
   - {fileID: 11400000, guid: 678d993a343e59c219ba5a21a4d69a83, type: 2}
   - {fileID: 11400000, guid: 326abc806c043d861ae9699f4f082e88, type: 2}
   - {fileID: 11400000, guid: 49c3a81496009827ea8f984ac2f5840b, type: 2}
   - {fileID: 11400000, guid: d8fc4e8180554854a9c144a949e5e5e4, type: 2}
+  - {fileID: 11400000, guid: ad2fb95642cbeca4ca12710becc62a5b, type: 2}
+  - {fileID: 11400000, guid: 915463f3f0532904b8515cdfb529471f, type: 2}
   level: {fileID: 0}
   currentLevel: 0
   startLevelSound: {fileID: 8300000, guid: 898d88c077b22034cab3743edce98633, type: 3}
